@@ -1,0 +1,194 @@
+@media only screen and (max-width: 600px) {
+  .cameraIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  .profilePic {
+    position: absolute;
+    width: 150px !important;
+    height: 150px !important;
+    top: 1;
+  }
+  .editIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    margin-right: 10px;
+  }
+    .profileDiv {
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 20px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .cameraIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  .profilePic {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  .profileDiv {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+  .editIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    margin-right: 10px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .cameraIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+
+  .profileDiv {
+    position: absolute;
+    margin-top: 50px;
+    margin-left: 20px;
+  }
+  .editIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    margin-right: 10px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .cameraIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  .profileDiv {
+    position: absolute;
+    margin-top: 90px;
+    margin-left: 20px;
+  }
+  .editIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    margin-right: 10px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1440px) {
+  .cameraIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  .profileDiv {
+    position: absolute;
+    margin-top: 180px;
+    margin-left: 20px;
+  }
+  .editIcon {
+    position: absolute;
+    display: flex;
+    background-color: white;
+    border: 0;
+    padding: 0;
+    justify-content: center;
+    align-content: space-around;
+    width: 40px;
+    height: 40px;
+    right: 0;
+    margin-right: 10px;
+  }
+}

@@ -6,8 +6,7 @@ const InfoSection = () => {
     <Card.Body className="position-relative">
       <Row>
         <Button
-          className=" position-absolute d-flex bg-white border-0 p-0 justify-content-center align-content-around"
-          style={{ width: '40px', height: '40px', left: 1250, top: 15 }}
+          className="editIcon"
         >
           <AiOutlineEdit
             style={{
@@ -56,8 +55,12 @@ const InfoSection = () => {
           <Button className="rounded-pill me-2 pt-1 pb-1 shadow">
             Attività
           </Button>
-          <Button className="rounded-pill me-2 pt-1 pb-1 shadow">Esperienze</Button>
-          <Button className="rounded-pill me-2 pt-1 pb-1 shadow">Formazione</Button>
+          <Button className="rounded-pill me-2 pt-1 pb-1 shadow">
+            Esperienze
+          </Button>
+          <Button className="rounded-pill me-2 pt-1 pb-1 shadow">
+            Formazione
+          </Button>
         </Col>
       </Row>
     </Card.Body>
