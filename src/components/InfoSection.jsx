@@ -1,9 +1,22 @@
-import { Card, Col, Image, Row } from 'react-bootstrap'
+import { Button, Card, Col, Image, Row } from 'react-bootstrap'
+import { AiOutlineEdit } from 'react-icons/ai'
 
 const InfoSection = () => {
   return (
-    <Card.Body>
+    <Card.Body className="position-relative">
       <Row>
+        <Button
+          className=" position-absolute d-flex bg-white border-0 p-0 justify-content-center align-content-around"
+          style={{ width: '40px', height: '40px', left: 1080, top: 15 }}
+        >
+          <AiOutlineEdit
+            style={{
+              color: '#181818',
+              width: '35px',
+              height: '35px',
+            }}
+          />
+        </Button>
         <Col sm={6} className="mt-5">
           <h3 className="mb-0">Nome Cognome</h3>
           <p className="fw-ligh mt-0 mb-1">Posizione Lavorativa</p>
@@ -14,12 +27,16 @@ const InfoSection = () => {
             className="rounded-circle"
             src="https://placedog.net/40/40"
             style={{ width: '40px', height: '40px' }}
-          >
-          </Image>
-            <span className='ms-2'>SCUOLA</span>
+          ></Image>
+          <span className="ms-2">SCUOLA</span>
         </Col>
-        
-
+      </Row>
+      <Row className="align-content-start">
+        <Col className="d-flex justify-content-start">
+          <Button className="rounded-pill me-2 pt-1 pb-1">Attività</Button>
+          <Button className="rounded-pill me-2 pt-1 pb-1">Esperienze</Button>
+          <Button className="rounded-pill me-2 pt-1 pb-1">Formazione</Button>
+        </Col>
       </Row>
     </Card.Body>
   )
