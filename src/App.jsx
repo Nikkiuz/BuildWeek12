@@ -1,15 +1,14 @@
-import '../src/assets/css/App.css'
-import ActivitiesComponent from './components/ActivitiesComponent'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
+import "../src/assets/css/App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import HeroSection from "../src/components/HeroSection.jsx";
+import Sidebar from "./components/SideBar.jsx";
+
 function App() {
   return (
     <>
-      <div>
-        <ActivitiesComponent />
-      </div>
+      <Sidebar></Sidebar>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
