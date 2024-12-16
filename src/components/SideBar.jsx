@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Card, Button, ListGroup, Container, Row, Col } from 'react-bootstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { FaPen } from 'react-icons/fa'
 
 const Sidebar = () => {
   return (
@@ -24,7 +23,7 @@ const Sidebar = () => {
                   <p className="mb-0">Italiano</p>
                 </div>
                 <a href="#" className="text-decoration-none text-primary">
-                  <FontAwesomeIcon icon={faPen} />
+                  <FaPen />
                 </a>
               </Card.Body>
             </Card>
@@ -45,7 +44,7 @@ const Sidebar = () => {
                   </p>
                 </div>
                 <a href="#" className="text-decoration-none text-primary">
-                  <FontAwesomeIcon icon={faPen} />
+                  <FaPen />
                 </a>
               </Card.Body>
             </Card>
