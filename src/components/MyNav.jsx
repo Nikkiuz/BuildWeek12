@@ -153,8 +153,6 @@ const MyNav = () => {
           </div>
         </Button>
       </Container>
-
-      <Button></Button>
     </Navbar>
   )
 }
