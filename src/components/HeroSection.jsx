@@ -15,9 +15,9 @@ const HeroSection = () => {
           <InfoSection />
           <Col className="position-absolute" style={{ top: 115, left: 30 }}>
             <Image
-              src="https://placedog.net/170/180"
+              src="https://placedog.net/180/180"
               className="rounded-circle"
-              style={{ border: '5px solid white' }}
+              style={{ border: '5px solid white', width: '190', height: '190' }}
             />
           </Col>
           <Button
