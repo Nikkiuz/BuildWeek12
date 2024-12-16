@@ -7,7 +7,7 @@ const InfoSection = () => {
       <Row>
         <Button
           className=" position-absolute d-flex bg-white border-0 p-0 justify-content-center align-content-around"
-          style={{ width: '40px', height: '40px', left: 1080, top: 15 }}
+          style={{ width: '40px', height: '40px', left: 1250, top: 15 }}
         >
           <AiOutlineEdit
             style={{
@@ -23,19 +23,41 @@ const InfoSection = () => {
           <p className="fw-light mt-0">Posizione</p>
         </Col>
         <Col sm={6} className="mt-5 text-center">
-          <Image
-            className="rounded-circle"
-            src="https://placedog.net/40/40"
-            style={{ width: '40px', height: '40px' }}
-          ></Image>
-          <span className="ms-2">SCUOLA</span>
+          <Row className="flex-column">
+            <Col className="mb-2">
+              <Image
+                className="rounded-circle"
+                src="https://placedog.net/40/40"
+                style={{ width: '40px', height: '40px' }}
+              ></Image>
+              <span className="ms-2">SCUOLA</span>
+            </Col>
+            <Col className="mb-2">
+              <Image
+                className="rounded-circle"
+                src="https://placedog.net/40/40"
+                style={{ width: '40px', height: '40px' }}
+              ></Image>
+              <span className="ms-2">SCUOLA</span>
+            </Col>
+            <Col>
+              <Image
+                className="rounded-circle"
+                src="https://placedog.net/40/40"
+                style={{ width: '40px', height: '40px' }}
+              ></Image>
+              <span className="ms-2">SCUOLA</span>
+            </Col>
+          </Row>
         </Col>
       </Row>
       <Row className="align-content-start">
         <Col className="d-flex justify-content-start">
-          <Button className="rounded-pill me-2 pt-1 pb-1">Attività</Button>
-          <Button className="rounded-pill me-2 pt-1 pb-1">Esperienze</Button>
-          <Button className="rounded-pill me-2 pt-1 pb-1">Formazione</Button>
+          <Button className="rounded-pill me-2 pt-1 pb-1 shadow">
+            Attività
+          </Button>
+          <Button className="rounded-pill me-2 pt-1 pb-1 shadow">Esperienze</Button>
+          <Button className="rounded-pill me-2 pt-1 pb-1 shadow">Formazione</Button>
         </Col>
       </Row>
     </Card.Body>

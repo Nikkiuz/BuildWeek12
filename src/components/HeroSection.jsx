@@ -13,7 +13,7 @@ const HeroSection = () => {
             style={{ height: '200', width: '100%' }}
           />
           <InfoSection />
-          <Col className="position-absolute" style={{ top: 115, left: 30 }}>
+          <Col className="position-absolute" style={{ top: 140, left: 30 }}>
             <Image
               src="https://placedog.net/180/180"
               className="rounded-circle"
@@ -22,7 +22,7 @@ const HeroSection = () => {
           </Col>
           <Button
             className=" position-absolute rounded-circle d-flex bg-white border-0 p-0 justify-content-center align-content-around"
-            style={{ width: '30px', height: '30px', left: 1090, top: 20 }}
+            style={{ width: '30px', height: '30px', left: 1250, top: 20 }}
           >
             <AiFillCamera
               style={{
