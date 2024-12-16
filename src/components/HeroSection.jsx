@@ -1,5 +1,6 @@
-import { Card, Col, Container, Image, Row } from 'react-bootstrap'
+import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap'
 import InfoSection from './InfoSection'
+import { AiFillCamera } from 'react-icons/ai'
 
 const HeroSection = () => {
   return (
@@ -12,13 +13,26 @@ const HeroSection = () => {
             style={{ height: '200', width: '100%' }}
           />
           <InfoSection />
-          <Col className="position-absolute" style={{ top: 120, left: 30 }}>
+          <Col className="position-absolute" style={{ top: 115, left: 30 }}>
             <Image
               src="https://placedog.net/170/180"
               className="rounded-circle"
               style={{ border: '5px solid white' }}
             />
           </Col>
+          <Button
+            className=" position-absolute rounded-circle d-flex bg-white border-0 p-0 justify-content-center align-content-around"
+            style={{ width: '30px', height: '30px', left: 1090, top: 20 }}
+          >
+            <AiFillCamera
+              style={{
+                color: '#2A6097',
+                width: '18px',
+                height: '18px',
+                margin: '5px',
+              }}
+            />
+          </Button>
         </Card>
       </Row>
     </Container>
