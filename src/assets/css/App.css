@@ -1,3 +1,14 @@
 .bg {
   background-color: #f4f2ee;
 }
+
+.nav-link-custom {
+  color: #212529;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link-custom:hover {
+  color: #0a66c2;
+  text-decoration: underline;
+}
