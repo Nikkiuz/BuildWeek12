@@ -45,7 +45,7 @@ const ActivitiesComponent = () => {
     <Container>
       <Card className=" d-flex mt-2 " style={{ backgroundColor: 'white' }}>
         <Card.Header className="d-flex align-items-center">
-          Attività
+          <span className="fw-bold">Attività</span>
           <div className="ms-auto ">
             <Button
               id="transitionButton"
