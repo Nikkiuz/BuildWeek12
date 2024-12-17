@@ -5,6 +5,7 @@ import { CardBody, CardTitle, Container, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import { AiOutlineEdit } from 'react-icons/ai'
+import '../assets/css/Activities.css'
 
 const ActivitiesComponent = () => {
   const activities = [
@@ -47,11 +48,11 @@ const ActivitiesComponent = () => {
           Attività
           <div className="ms-auto ">
             <Button
+              id="transitionButton"
               className="mx-3 btn-outline-primary rounded-pill"
               style={{
                 backgroundColor: 'transparent',
-                color: 'blue',
-                border: '1px solid blue',
+                border: '1px solid',
               }}
             >
               Crea un post

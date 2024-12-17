@@ -1,0 +1,10 @@
+#transitionButton {
+  transition: all 0.3s ease;
+}
+
+#transitionButton:hover {
+  background-color: rgba(0, 0, 255, 0.1);
+  color: #0b5ed7;
+  font-weight: bold;
+  transform: scale(1.1);
+}
