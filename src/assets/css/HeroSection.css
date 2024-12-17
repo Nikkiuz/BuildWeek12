@@ -16,9 +16,8 @@
   }
   .profilePic {
     position: absolute;
-    width: 150px !important;
-    height: 150px !important;
-    top: 1;
+    width: 130px !important;
+    height: 130px !important;
   }
   .editIcon {
     position: absolute;
@@ -33,7 +32,7 @@
     right: 0;
     margin-right: 10px;
   }
-    .profileDiv {
+  .profileDiv {
     position: absolute;
     margin-top: 5px;
     margin-left: 20px;
@@ -57,14 +56,16 @@
     margin-right: 10px;
     margin-top: 10px;
   }
-  .profilePic {
-    width: 150px !important;
-    height: 150px !important;
-  }
+
   .profileDiv {
     position: absolute;
     margin-top: 30px;
     margin-left: 20px;
+  }
+  .profilePic {
+    position: absolute;
+    width: 130px !important;
+    height: 130px !important;
   }
   .editIcon {
     position: absolute;
@@ -104,6 +105,11 @@
     margin-top: 50px;
     margin-left: 20px;
   }
+  .profilePic {
+    position: absolute;
+    width: 130px !important;
+    height: 130px !important;
+  }
   .editIcon {
     position: absolute;
     display: flex;
@@ -138,8 +144,13 @@
   }
   .profileDiv {
     position: absolute;
-    margin-top: 90px;
+    margin-top: 50px;
     margin-left: 20px;
+  }
+  .profilePic {
+    position: absolute;
+    width: 130px !important;
+    height: 130px !important;
   }
   .editIcon {
     position: absolute;
@@ -175,8 +186,13 @@
   }
   .profileDiv {
     position: absolute;
-    margin-top: 180px;
+    margin-top: 110px;
     margin-left: 20px;
+  }
+  .profilePic {
+    position: absolute;
+    width: 130px !important;
+    height: 130px !important;
   }
   .editIcon {
     position: absolute;
