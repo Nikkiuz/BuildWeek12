@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { FaPlus } from 'react-icons/fa'
-import '../assets/css/Experience.css'
+
 
 const ExperienceComponent = () => {
   const experience = [
