@@ -8,6 +8,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import ActivitiesComponent from './components/ActivitiesComponent.jsx'
 import CreatePost from './components/CreatePost.jsx'
 import ExperienceComponent from './components/ExperienceComponent.jsx'
+import FormationComponent from './components/FormationComponent.jsx'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <HeroSection />
               <ActivitiesComponent />
               <ExperienceComponent />
+              <FormationComponent />
             </Col>
             <Col lg={3} className=" d-none d-md-flex">
               <Sidebar />
