@@ -5,9 +5,7 @@ const InfoSection = () => {
   return (
     <Card.Body className="position-relative">
       <Row>
-        <Button
-          className="editIcon"
-        >
+        <Button className="editIcon">
           <AiOutlineEdit
             style={{
               color: '#181818',
@@ -23,7 +21,7 @@ const InfoSection = () => {
         </Col>
         <Col sm={6} className="mt-5 text-center">
           <Row className="flex-column">
-            <Col className="mb-2">
+            <Col className="d-none d-md-flex mb-2">
               <Image
                 className="rounded-circle"
                 src="https://placedog.net/40/40"
@@ -31,7 +29,7 @@ const InfoSection = () => {
               ></Image>
               <span className="ms-2">SCUOLA</span>
             </Col>
-            <Col className="mb-2">
+            <Col className=" d-none d-md-flex mb-2">
               <Image
                 className="rounded-circle"
                 src="https://placedog.net/40/40"
@@ -39,7 +37,7 @@ const InfoSection = () => {
               ></Image>
               <span className="ms-2">SCUOLA</span>
             </Col>
-            <Col>
+            <Col className=" d-none d-md-flex mb-2">
               <Image
                 className="rounded-circle"
                 src="https://placedog.net/40/40"
