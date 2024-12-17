@@ -90,7 +90,7 @@ const ExperienceComponent = () => {
           </div>
         </Card.Header>
         <Card.Body>
-          <Row xs={1} sm={2} md={2} lg={1} className="g-1">
+          <Row xs={12} sm={12} md={12} lg={12} className="g-1">
             {experience.map((exp, index) => (
               <Card key={index}>
                 <CardBody className="d-flex">
