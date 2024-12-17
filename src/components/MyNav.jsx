@@ -71,7 +71,7 @@ const MyNav = () => {
             </Button>
 
             <Link
-              to={'/'}
+              to={'/home'}
               className="nav-link d-flex flex-column align-items-center me-4"
             >
               <FaHome size={30} />
