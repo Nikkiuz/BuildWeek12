@@ -1,20 +1,12 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Button, ListGroup, Container, Row, Col } from "react-bootstrap";
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Card, Button, ListGroup, Container, Row, Col } from 'react-bootstrap'
+import { FaPen } from 'react-icons/fa'
 
 const Sidebar = () => {
   return (
     <Container className="mt-4">
       <Row>
-        <Col md={8}>
-          <h1>Contenuto Principale</h1>
-          <p>Inserisci qui il contenuto principale della tua pagina.</p>
-          <p style={{ height: "1500px" }}>
-            Contenuto lungo per abilitare lo scorrimento della pagina.
-          </p>
-        </Col>
-
-        <Col md={4}>
+        <Col>
           <div className="sidebar">
             <Card className="mb-3">
               <Card.Body className="d-flex justify-content-between align-items-center">
@@ -23,7 +15,7 @@ const Sidebar = () => {
                   <p className="mb-0">Italiano</p>
                 </div>
                 <a href="#" className="text-decoration-none text-primary">
-                  <FontAwesomeIcon icon={faPen} />
+                  <FaPen />
                 </a>
               </Card.Body>
             </Card>
@@ -44,7 +36,7 @@ const Sidebar = () => {
                   </p>
                 </div>
                 <a href="#" className="text-decoration-none text-primary">
-                  <FontAwesomeIcon icon={faPen} />
+                  <FaPen />
                 </a>
               </Card.Body>
             </Card>
@@ -170,7 +162,7 @@ const Sidebar = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
