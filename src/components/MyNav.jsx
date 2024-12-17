@@ -78,14 +78,14 @@ const MyNav = () => {
               <span className=" fs-6">Home</span>
             </Link>
             <Link
-              to={'/'}
+              to={'/rete'}
               className="nav-link d-flex flex-column align-items-center me-4"
             >
               <FaUserFriends size={30} />
               <span className=" fs-6">Rete</span>
             </Link>
             <Link
-              to={'/'}
+              to={'/lavoro'}
               className="nav-link d-flex flex-column align-items-center me-4"
             >
               <FaBriefcase size={30} />
@@ -95,18 +95,21 @@ const MyNav = () => {
         )}
 
         <Button className=" d-flex flex-column bg-transparent text-dark border-0">
-          <img
-            src={avatar}
-            alt="avatar"
-            width="35px"
-            className="rounded-circle"
-          />
+          <Link to={'/profile'}>
+            <img
+              src={avatar}
+              alt="avatar"
+              width="35px"
+              className="rounded-circle"
+            />
+          </Link>
+
           <div className=" d-flex mx-auto">
             Tu
             <NavDropdown align="end" className="ms-1">
               <div className=" d-flex flex-column">
                 <Link
-                  to={'/'}
+                  to={'/profile'}
                   className="nav-link me-2 d-flex align-items-center"
                 >
                   <img
@@ -117,12 +120,15 @@ const MyNav = () => {
                   />
                   Cristiano Ronaldo
                 </Link>
-                <Button
-                  variant="outline-primary"
-                  className="px-5 py-0 rounded-5 mx-2"
-                >
-                  Visualizza profilo
-                </Button>
+                <Link to={'/profile'}>
+                  <Button
+                    variant="outline-primary"
+                    className="px-5 py-0 rounded-5 mx-2"
+                  >
+                    Visualizza profilo
+                  </Button>
+                </Link>
+
                 <NavDropdown.Divider className="d-flex flex-column" />
                 <NavDropdown.Item className="fw-bold">Account</NavDropdown.Item>
                 <Link to={'/'} className="dropdown-item">

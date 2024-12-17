@@ -2,36 +2,21 @@ import '../src/assets/css/App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import MyNav from './components/MyNav'
-import Sidebar from './components/SideBar.jsx'
-import HeroSection from './components/HeroSection.jsx'
-import { Col, Container, Row } from 'react-bootstrap'
-import ActivitiesComponent from './components/ActivitiesComponent.jsx'
-import CreatePost from './components/CreatePost.jsx'
-import ExperienceComponent from './components/ExperienceComponent.jsx'
+import Home from './pages/Home.jsx'
+import Profile from './pages/Profile.jsx'
 
 function App() {
   return (
     <BrowserRouter>
-      <Container>
-        <header>
-          <MyNav />
-        </header>
-        <main>
-          <Routes>
-            <Route path="/home" element={<CreatePost />} />
-          </Routes>
-          <Row className=" justify-content-end">
-            <Col xs={12} lg={9}>
-              <HeroSection />
-              <ActivitiesComponent />
-              <ExperienceComponent />
-            </Col>
-            <Col lg={3} className=" d-none d-md-flex">
-              <Sidebar />
-            </Col>
-          </Row>
-        </main>
-      </Container>
+      <header>
+        <MyNav />
+      </header>
+      <main className="bg">
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </main>
     </BrowserRouter>
   )
 }

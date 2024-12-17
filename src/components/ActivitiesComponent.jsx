@@ -43,7 +43,7 @@ const ActivitiesComponent = () => {
 
   return (
     <Container>
-      <Card className=" d-flex " style={{ backgroundColor: 'white' }}>
+      <Card className=" d-flex mt-2 " style={{ backgroundColor: 'white' }}>
         <Card.Header className="d-flex align-items-center">
           Attività
           <div className="ms-auto ">

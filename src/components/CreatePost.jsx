@@ -42,7 +42,7 @@ const CreatePost = () => {
   }
 
   return (
-    <Card className="w-75">
+    <Card className="mt-4">
       <CardBody>
         {/* Form principale */}
         <Form className="d-flex align-items-center mb-3">
