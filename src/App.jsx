@@ -6,6 +6,7 @@ import Sidebar from './components/SideBar.jsx'
 import HeroSection from './components/HeroSection.jsx'
 import { Col, Container, Row } from 'react-bootstrap'
 import ActivitiesComponent from './components/ActivitiesComponent.jsx'
+import ExperienceComponent from './components/ExperienceComponent.jsx'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Col xs={12} lg={9}>
               <HeroSection />
               <ActivitiesComponent />
+              <ExperienceComponent />
             </Col>
             <Col lg={3} className=" d-none d-md-flex">
               <Sidebar />

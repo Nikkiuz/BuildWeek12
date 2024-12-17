@@ -76,21 +76,15 @@ const ExperienceComponent = () => {
 
   return (
     <Container>
-      <Card className=" d-flex " style={{ backgroundColor: 'white' }}>
+      <Card className=" d-flex mt-4" style={{ backgroundColor: 'white' }}>
         <Card.Header className="d-flex align-items-center">
           <span className="fw-bold">Esperienza</span>
-          <div className="ms-auto ">
-            <Button>
+          <div className="ms-auto">
+            <Button className='mx-2'>
               <FaPlus />
             </Button>
             <Button>
               <AiOutlineEdit
-                className="editIcon"
-                style={{
-                  color: '#181818',
-                  width: '35px',
-                  height: '35px',
-                }}
               />
             </Button>
           </div>
@@ -99,15 +93,17 @@ const ExperienceComponent = () => {
           <Row xs={1} sm={2} md={2} lg={1} className="g-1">
             {experience.map((exp, index) => (
               <Card key={index}>
-                <CardBody>
-                  <CardTitle className="fw-bold">{exp.title}</CardTitle>
-                  <div className="d-flex">
+                <CardBody className="d-flex">
+                  <div className="">
+                    <CardTitle className="fw-bold">{exp.title}</CardTitle>
                     <Card.Img src={exp.cover} style={{ width: '100px' }} />
-                    <Card.Text className="mx-3">{exp.place}</Card.Text>
-                    <Card.Text className="mx-3" style={{ opacity: '0.7' }}>
+                  </div>
+                  <div>
+                    <Card.Text className="mx-3 mt-1">{exp.place}</Card.Text>
+                    <Card.Text className="mx-3 my-0" style={{ opacity: '0.7' }}>
                       {exp.date}
                     </Card.Text>
-                    <Card.Text className="mx-3" style={{ opacity: '0.7' }}>
+                    <Card.Text className="mx-3 my-0" style={{ opacity: '0.7' }}>
                       {exp.where}
                     </Card.Text>
                     <Card.Text className="mx-3 fw-bold">
