@@ -6,15 +6,7 @@ const Sidebar = () => {
   return (
     <Container className="mt-4">
       <Row>
-        <Col md={8}>
-          <h1>Contenuto Principale</h1>
-          <p>Inserisci qui il contenuto principale della tua pagina.</p>
-          <p style={{ height: '1500px' }}>
-            Contenuto lungo per abilitare lo scorrimento della pagina.
-          </p>
-        </Col>
-
-        <Col md={4}>
+        <Col>
           <div className="sidebar">
             <Card className="mb-3">
               <Card.Body className="d-flex justify-content-between align-items-center">
