@@ -25,6 +25,18 @@ const HeroSection = () => {
               />
             </Col>
             <Col>
+              <Button className=" cameraProfile rounded-circle">
+                <AiFillCamera
+                  style={{
+                    color: '#2A6097',
+                    width: '18px',
+                    height: '18px',
+                    margin: '5px',
+                  }}
+                />
+              </Button>
+            </Col>
+            <Col>
               <Button className="cameraIcon rounded-circle">
                 <AiFillCamera
                   style={{
