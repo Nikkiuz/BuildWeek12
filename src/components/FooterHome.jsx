@@ -4,7 +4,7 @@ import '../assets/css/App.css'
 
 const FooterHome = () => {
   return (
-    <Container>
+    <Container className=" fixed-bottom">
       <Row className="text-center">
         <Col>
           <Nav className="justify-content-center flex-wrap small">
