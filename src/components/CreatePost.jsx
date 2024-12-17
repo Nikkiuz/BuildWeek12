@@ -14,11 +14,11 @@ const CreatePost = () => {
   const handleShow = () => setShow(true)
 
   return (
-    <Card>
+    <Card className=" w-75">
       <CardBody>
-        <Form inline className=" d-flex justify-content-center  mb-3">
-          <Row>
-            <Col xs="auto">
+        <Form className="d-flex align-items-center mb-3">
+          <Row className="w-100">
+            <Col xs="auto" className="d-flex align-items-center">
               <Link to={'/'}>
                 <img
                   src={avatar}
@@ -28,15 +28,17 @@ const CreatePost = () => {
                 />
               </Link>
             </Col>
-            <Col xs="auto" onClick={handleShow}>
+            <Col className="d-flex align-items-center">
               <Form.Control
                 type="text"
                 placeholder="Crea un post"
-                className=" mr-sm-2 rounded-5 py-2 px-3 "
+                className="rounded-5 py-2 px-3 w-100"
+                onClick={handleShow}
               />
             </Col>
           </Row>
         </Form>
+
         <Row className="d-flex justify-content-center align-items-center">
           <Col xs="auto">
             <Button
