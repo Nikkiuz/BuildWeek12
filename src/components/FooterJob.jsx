@@ -2,7 +2,7 @@ import { Nav } from 'react-bootstrap'
 import Logo from '../assets/logos/linkedin.png'
 import '../assets/css/App.css'
 
-const FooterHome = () => {
+const FooterJob = () => {
   return (
     <>
       <Nav className="justify-content-center flex-wrap small">
@@ -42,4 +42,4 @@ const FooterHome = () => {
   )
 }
 
-export default FooterHome
+export default FooterJob

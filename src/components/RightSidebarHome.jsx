@@ -2,10 +2,7 @@ import '../assets/css/RightSidebarHome.css'
 
 const RightSidebarHome = () => {
   return (
-    <div
-      className="mt-4 bg-white p-3 border-start"
-      style={{ minHeight: '100vh' }}
-    >
+    <div className="mt-4 bg-white p-3 border-start">
       <h6 className="fw-bold mb-3">In primo piano</h6>
       <ul className="list-unstyled">
         <li className="mb-2">

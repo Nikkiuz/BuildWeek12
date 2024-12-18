@@ -2,10 +2,7 @@ import '../assets/css/LeftSidebarHome.css'
 
 const LeftSidebarHome = () => {
   return (
-    <div
-      className="bg-white p-3 border-end mt-4"
-      style={{ minHeight: '100vh' }}
-    >
+    <div className="bg-white p-3 border-end mt-4">
       <div className="text-center mb-4">
         <img
           src="https://via.placeholder.com/100"
