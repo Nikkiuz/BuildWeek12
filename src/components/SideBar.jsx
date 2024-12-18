@@ -8,37 +8,24 @@ import {
   Col,
   Spinner,
   Alert,
-  Form,
 } from 'react-bootstrap'
 import { FaPen } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllProfiles } from '../redux/actions/userAction'
-import { setQuery } from '../redux/features/searchSlice'
 
 const Sidebar = () => {
   const dispatch = useDispatch()
 
   // Recupero dei dati dallo store Redux
-  const meProfile = useSelector((state) => state.user.meProfile)
-  const allProfile = useSelector((state) => state.user.allProfile)
-  const loading = useSelector((state) => state.user.loading)
-  const error = useSelector((state) => state.user.error)
-  const searchQuery = useSelector((state) => state.search.query)
+  const meProfile = useSelector((state) => state.meProfile)
+  const allProfile = useSelector((state) => state.allProfile)
+  const loading = useSelector((state) => state.loading)
+  const error = useSelector((state) => state.error)
 
   // Chiamata API al montaggio del componente
   useEffect(() => {
     dispatch(fetchAllProfiles())
   }, [dispatch])
-
-  // Funzione per gestire la modifica della barra di ricerca
-  const handleSearchChange = (e) => {
-    dispatch(setQuery(e.target.value))
-  }
-
-  // Funzione per filtrare i profili in base alla searchQuery
-  const filteredProfiles = allProfile.filter((person) =>
-    person.name.toLowerCase().includes(searchQuery.toLowerCase())
-  )
 
   // Stato di caricamento
   if (loading) {
@@ -58,21 +45,13 @@ const Sidebar = () => {
     )
   }
 
+  console.log('STAMPA TUTTO DENTRO COMPONENTE : ', allProfile[1])
+
   return (
     <Container className="mt-4">
       <Row>
         <Col>
           <div className="sidebar">
-            {/* Barra di ricerca */}
-            <Form className="mb-4">
-              <Form.Control
-                type="text"
-                value={searchQuery}
-                onChange={handleSearchChange}
-                placeholder="Cerca un profilo..."
-              />
-            </Form>
-
             {/* Lingua del profilo */}
             <Card className="mb-3">
               <Card.Body className="d-flex justify-content-between align-items-center">
@@ -98,7 +77,8 @@ const Sidebar = () => {
                       rel="noopener noreferrer"
                       className="text-decoration-none"
                     >
-                      {`https://www.linkedin.com/in/${meProfile.email}`}
+                      {`https://www.linkedin.com/in/
+                     ${meProfile.email}`}
                     </a>
                   </p>
                 </div>
@@ -126,11 +106,12 @@ const Sidebar = () => {
               </Card.Body>
             </Card>
 
-            {/* Persone che potresti conoscere (filtrate dalla query di ricerca) */}
+            {/* Persone che potresti conoscere */}
+
             <Card className="mb-3">
-              <Card.Header>Persone che potresti conoscere</Card.Header>
+              <Card.Header>Altre visualizzazioni</Card.Header>
               <ListGroup variant="flush">
-                {filteredProfiles.slice(0, 3).map((person) => (
+                {allProfile.slice(0, 3).map((person) => (
                   <ListGroup.Item
                     key={person._id}
                     className="d-flex align-items-center"
@@ -157,11 +138,10 @@ const Sidebar = () => {
               </ListGroup>
             </Card>
 
-            {/* Altre visualizzazioni */}
             <Card className="mb-3">
-              <Card.Header>Altre visualizzazioni</Card.Header>
+              <Card.Header>Persone che potresti conoscere</Card.Header>
               <ListGroup variant="flush">
-                {filteredProfiles.slice(3, 7).map((person) => (
+                {allProfile.slice(4, 11).map((person) => (
                   <ListGroup.Item
                     key={person._id}
                     className="d-flex align-items-center"
@@ -186,6 +166,24 @@ const Sidebar = () => {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
+            </Card>
+
+            {/* Annuncio Promozionale */}
+            <Card className="promo mb-3">
+              <Card.Header>Promosso</Card.Header>
+              <Card.Body className="text-center">
+                <img
+                  src="https://via.placeholder.com/200x100"
+                  alt="Annuncio"
+                  className="img-fluid mb-2"
+                />
+                <p className="mb-1">
+                  Omar, scopri le opportunità offerte da Four Seasons
+                </p>
+                <Button variant="outline-primary" size="sm" className="w-100">
+                  Segui
+                </Button>
+              </Card.Body>
             </Card>
           </div>
         </Col>
