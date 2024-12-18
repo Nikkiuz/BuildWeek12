@@ -78,24 +78,31 @@ export const fetchUserProfile =
   };
 
 // Action: Aggiorna il proprio profilo
-// export const updateProfile =
-//   (userData, keyName = "Francois") =>
-//   (dispatch) => {
-//     dispatch({ type: FETCH_LOADING });
+export const updateProfile =
+  (userData, keyName = "Francois") =>
+  (dispatch) => {
+    dispatch({ type: FETCH_LOADING });
 
-//     ProfilesAPI.updateProfile(userData, keyName)
-//       .then((updatedProfile) => {
-//         dispatch({
-//           type: UPDATE_PROFILE_SUCCESS,
-//           payload: updatedProfile,
-//         });
-//         console.log(`Profilo aggiornato con successo:`, updatedProfile);
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: FETCH_ERROR,
-//           payload: error.message,
-//         });
-//         console.error("Errore nell'aggiornamento del profilo:", error);
-//       });
-//   };
+    ProfilesAPI.updateProfile(userData, keyName)
+      .then((updatedProfile) => {
+        dispatch({
+          type: UPDATE_PROFILE_SUCCESS,
+          payload: updatedProfile,
+        });
+        console.log(`Profilo aggiornato con successo:`, updatedProfile);
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_ERROR,
+          payload: error.message,
+        });
+        console.error("Errore nell'aggiornamento del profilo:", error);
+      });
+  };
+
+export const updateCopertinaProfile = (newUrl) => {
+  return {
+    type: "UPDATE_COPERTINA_PROFILE",
+    payload: newUrl,
+  };
+};
