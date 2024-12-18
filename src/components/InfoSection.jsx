@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, Col, Image, Row, Spinner, Alert } from "react-bootstrap";
 import { AiOutlineEdit } from "react-icons/ai";
