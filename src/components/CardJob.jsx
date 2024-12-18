@@ -21,7 +21,7 @@ const CardJob = () => {
         throw new Error('Failed to fetch jobs')
       })
       .then((data) => {
-        // Salva i risultati dei lavori nel redux
+        console.log('Risposta dal server', data)
         dispatch(fetchJobsSuccess(data.data))
       })
       .catch((err) => {
@@ -35,13 +35,15 @@ const CardJob = () => {
       {error && <p>Error: {error}</p>}
       <div className="job-list">
         {jobs.map((job) => (
-          <Card key={job._id} className="mb-3 me-lg-4">
+          <Card key={job._id} className="me-lg-4">
             <Card.Body>
-              <Card.Title>{job.title}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                {job.company_name}
+              <Card.Title className=" text-primary">{job.title}</Card.Title>
+              <Card.Subtitle className="mb-1">{job.company_name}</Card.Subtitle>
+              <Card.Subtitle className=" text-muted">
+                {job.candidate_required_location}
               </Card.Subtitle>
-              <Card.Text>{job.category}</Card.Text>
+              <Card.Text className=" mb-0">Category: {job.category}</Card.Text>
+              <Card.Text>{job.publication_date}</Card.Text>
               <Button variant="outline-primary" href={job.url} target="_blank">
                 View
               </Button>
