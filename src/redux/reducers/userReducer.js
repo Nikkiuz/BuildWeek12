@@ -3,11 +3,13 @@ import {
   FETCH_ME_PROFILE_SUCCESS,
   FETCH_ERROR,
   FETCH_ALL_PROFILES_SUCCESS,
+  UPDATE_PROFILE_SUCCESS,
 } from "../actions/userAction.js";
 
 // Stato iniziale
 const initialState = {
   meProfile: [],
+  copertinaProfileUrl: "https://placedog.net/935/200",
   allProfile: [],
   loading: false,
   error: null,
@@ -44,6 +46,23 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+
+    case UPDATE_PROFILE_SUCCESS: {
+      return {
+        ...state,
+        meProfile: {
+          ...state.meProfile, // Mantieni i dati esistenti
+          ...action.payload, // Sovrascrivi solo i campi specificati
+        },
+        loading: false,
+      };
+    }
+
+    case "UPDATE_COPERTINA_PROFILE":
+      return {
+        ...state,
+        copertinaProfileUrl: action.payload,
       };
 
     default:
