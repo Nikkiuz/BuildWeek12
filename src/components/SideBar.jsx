@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from 'react'
 import {
   Card,
   Button,
@@ -8,24 +8,24 @@ import {
   Col,
   Spinner,
   Alert,
-} from "react-bootstrap";
-import { FaPen } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProfiles } from "../redux/actions/userAction";
+} from 'react-bootstrap'
+import { FaPen } from 'react-icons/fa'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchAllProfiles } from '../redux/actions/userAction'
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   // Recupero dei dati dallo store Redux
-  const meProfile = useSelector((state) => state.meProfile);
-  const allProfile = useSelector((state) => state.allProfile);
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
+  const meProfile = useSelector((state) => state.meProfile)
+  const allProfile = useSelector((state) => state.allProfile)
+  const loading = useSelector((state) => state.loading)
+  const error = useSelector((state) => state.error)
 
   // Chiamata API al montaggio del componente
   useEffect(() => {
-    dispatch(fetchAllProfiles());
-  }, [dispatch]);
+    dispatch(fetchAllProfiles())
+  }, [dispatch])
 
   // Stato di caricamento
   if (loading) {
@@ -33,7 +33,7 @@ const Sidebar = () => {
       <div className="text-center mt-5">
         <Spinner animation="border" variant="primary" />
       </div>
-    );
+    )
   }
 
   // Stato di errore
@@ -42,10 +42,10 @@ const Sidebar = () => {
       <div className="text-center mt-5">
         <Alert variant="danger">Errore: {error}</Alert>
       </div>
-    );
+    )
   }
 
-  console.log("STAMPA TUTTO DENTRO COMPONENTE : ", allProfile[1]);
+  console.log('STAMPA TUTTO DENTRO COMPONENTE : ', allProfile[1])
 
   return (
     <Container className="mt-4">
@@ -120,7 +120,7 @@ const Sidebar = () => {
                       src={person.image}
                       alt={`Profilo di ${person.name}`}
                       className="me-3"
-                      style={{ width: "48px", height: "48px" }}
+                      style={{ width: '48px', height: '48px' }}
                     />
                     <div>
                       <h6 className="mb-0">{person.name}</h6>
@@ -150,7 +150,7 @@ const Sidebar = () => {
                       src={person.image}
                       alt={`Profilo di ${person.name}`}
                       className="me-3"
-                      style={{ width: "48px", height: "48px" }}
+                      style={{ width: '48px', height: '48px' }}
                     />
                     <div>
                       <h6 className="mb-0">{person.name}</h6>
@@ -189,7 +189,7 @@ const Sidebar = () => {
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
