@@ -1,7 +1,41 @@
-import { Button, Card, Container } from 'react-bootstrap'
+import { Alert, Button, Card, Container, Spinner } from 'react-bootstrap'
 import { AiOutlineEdit } from 'react-icons/ai'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchMeProfile } from '../redux/actions/userAction'
 
 const MyBio = () => {
+  const dispatch = useDispatch()
+
+  // Recupero dati dallo store Redux
+  const profile = useSelector((state) => state.meProfile) // Assumendo che "profile" contenga il profilo personale
+  const loading = useSelector((state) => state.loading)
+  const error = useSelector((state) => state.error)
+
+  // Chiamata API al montaggio del componente
+  useEffect(() => {
+    dispatch(fetchMeProfile())
+  }, [dispatch])
+
+  // Stato di caricamento
+  if (loading) {
+    return (
+      <div className="text-center mt-5">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    )
+  }
+
+  // Stato di errore
+  if (error) {
+    return (
+      <div className="text-center mt-5">
+        <Alert variant="danger">Errore: {error}</Alert>
+      </div>
+    )
+  }
+
+  console.log('PROVA FILA : ', profile)
   return (
     <Container>
       <Card className=" d-flex mt-4" style={{ backgroundColor: 'white' }}>
@@ -19,8 +53,7 @@ const MyBio = () => {
             </Button>
           </div>
         </Card.Header>
-        <Card.Body>{/* INSERIRE BIO DA PROFILO */}</Card.Body>
-        <Card.Footer>Mostra di più</Card.Footer>
+        <Card.Body>{profile?.bio || 'Biografia'}</Card.Body>
       </Card>
     </Container>
   )
