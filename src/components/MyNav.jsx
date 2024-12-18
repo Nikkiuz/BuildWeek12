@@ -27,74 +27,95 @@ const MyNav = () => {
   }
 
   return (
-    <Navbar className=" bg-white d-flex justify-content-center align-items-center">
+    <Navbar className="bg-white d-flex justify-content-center align-items-center">
       <Container className="mx-0">
-        {/* logo  */}
+        {/* LOGO */}
         <Navbar.Brand className="d-flex align-items-center">
           <img src={logo} alt="logo" width="40px" />
         </Navbar.Brand>
 
-        {/* SEARCH  */}
-        {InputSearch ? (
-          <div className="w-100 position-absolute top-0 start-0 bg-light p-3 d-flex align-items-center">
-            <Navbar.Brand className="me-3">
-              <img src={logo} alt="logo" width="40px" />
-            </Navbar.Brand>
-            <Form className="d-flex flex-grow-1">
-              <InputGroup>
-                <InputGroup.Text>
-                  <FaSearch />
-                </InputGroup.Text>
-                <FormControl
-                  type="search"
-                  placeholder="Cerca"
-                  aria-label="Search"
-                />
-                <Button
-                  variant="outline-primary"
-                  onClick={handleSearchCollapse}
-                >
-                  Chiudi
-                </Button>
-              </InputGroup>
-            </Form>
-          </div>
-        ) : (
-          <Nav>
-            <Button
-              variant="link"
-              className="nav-link d-flex flex-column align-items-center me-4"
+        {/* SEARCH SECTION */}
+        <div className="flex-grow">
+          {/* SEARCH - LG SCREEN */}
+          <Form className="d-none d-lg-flex w-100">
+            <InputGroup className="border rounded-1 d-flex">
+              <InputGroup.Text className="border-0 bg-white">
+                <FaSearch className="border-0 text-muted" />
+              </InputGroup.Text>
+              <FormControl
+                type="search"
+                aria-label="Search"
+                placeholder="Cerca"
+                className="border-0 shadow-none"
+              />
+            </InputGroup>
+          </Form>
+
+          {/* SEARCH - MD SCREEN */}
+          {InputSearch ? (
+            <div className="position-absolute top-0 start-0 w-100 bg-light p-3 d-flex align-items-center d-md-flex d-lg-none">
+              <Navbar.Brand className="me-3">
+                <img src={logo} alt="logo" width="40px" />
+              </Navbar.Brand>
+              <Form className="d-flex flex-grow-1">
+                <InputGroup className="border rounded-1 d-flex">
+                  <InputGroup.Text className="border-0 bg-white">
+                    <FaSearch className="border-0 text-muted" />
+                  </InputGroup.Text>
+                  <FormControl
+                    type="search"
+                    aria-label="Search"
+                    placeholder="Cerca"
+                    className="border-0 shadow-none"
+                  />
+                  <Button
+                    variant="outline-secondary"
+                    onClick={handleSearchCollapse}
+                    className=" border-0"
+                  >
+                    Chiudi
+                  </Button>
+                </InputGroup>
+              </Form>
+            </div>
+          ) : (
+            <Nav.Link
+              className="d-flex flex-column align-items-center me-4 d-md-flex d-lg-none"
               onClick={handleSearchExpand}
             >
-              <FaSearch size={30} />
+              <FaSearch size={28} className="mb-1 text-muted" />
               <span className="fs-6">Cerca</span>
-            </Button>
+            </Nav.Link>
+          )}
+        </div>
 
-            <Link
-              to={'/home'}
-              className="nav-link d-flex flex-column align-items-center me-4"
-            >
-              <FaHome size={30} />
-              <span className=" fs-6">Home</span>
-            </Link>
-            <Link
-              to={'/rete'}
-              className="nav-link d-flex flex-column align-items-center me-4"
-            >
-              <FaUserFriends size={30} />
-              <span className=" fs-6">Rete</span>
-            </Link>
-            <Link
-              to={'/lavoro'}
-              className="nav-link d-flex flex-column align-items-center me-4"
-            >
-              <FaBriefcase size={30} />
-              <span className=" fs-6">Lavoro</span>
-            </Link>
-          </Nav>
-        )}
+        {/* NAVIGATION */}
+        <Nav className="d-flex justify-content-center flex-grow-1 me-lg-5">
+          <Link
+            to={'/home'}
+            className="nav-link d-flex flex-column align-items-center me-4"
+          >
+            <FaHome size={30} className="mb-1" />
+            <span className="fs-6">Home</span>
+          </Link>
+          <Link
+            to={'/rete'}
+            className="nav-link d-flex flex-column align-items-center me-4"
+          >
+            <FaUserFriends size={30} className="mb-1" />
+            <span className="fs-6">Rete</span>
+          </Link>
+          <Link
+            to={'/lavoro'}
+            className="nav-link d-flex flex-column align-items-center me-4"
+          >
+            <FaBriefcase size={30} className="mb-1" />
+            <span className="fs-6">Lavoro</span>
+          </Link>
+        </Nav>
 
-        <Button className=" d-flex flex-column bg-transparent text-dark border-0">
+        {/* PROFILE SECTION */}
+        <Button className="d-flex flex-column bg-transparent text-dark border-0 align-items-center">
           <Link to={'/profile'}>
             <img
               src={avatar}
@@ -103,11 +124,10 @@ const MyNav = () => {
               className="rounded-circle"
             />
           </Link>
-
-          <div className=" d-flex mx-auto">
+          <div className="d-flex mx-auto">
             Tu
             <NavDropdown align="end" className="ms-1">
-              <div className=" d-flex flex-column">
+              <div className="d-flex flex-column">
                 <Link
                   to={'/profile'}
                   className="nav-link me-2 d-flex align-items-center"
