@@ -15,6 +15,9 @@ import { FaSearch, FaBriefcase, FaHome, FaUserFriends } from 'react-icons/fa'
 import logo from '../assets/logos/linkedin.png'
 import avatar from '../assets/images/avatar.png'
 
+import { useDispatch } from 'react-redux'
+import { setQuery } from '../redux/features/searchSlice'
+
 const MyNav = () => {
   const [InputSearch, setInputSearch] = useState(false)
 
@@ -26,8 +29,15 @@ const MyNav = () => {
     setInputSearch(false)
   }
 
+  const dispatch = useDispatch()
+
+  // Gestisce il cambiamento della query di ricerca nella barra di navigazione
+  const handleInputChange = (e) => {
+    dispatch(setQuery(e.target.value)) // Imposta il valore della query in Redux
+  }
+
   return (
-    <Navbar className="bg-white d-flex justify-content-center align-items-center">
+    <Navbar className="bg-white d-flex justify-content-center align-items-center my-0">
       <Container className="mx-0">
         {/* LOGO */}
         <Navbar.Brand className="d-flex align-items-center">
@@ -47,6 +57,7 @@ const MyNav = () => {
                 aria-label="Search"
                 placeholder="Cerca"
                 className="border-0 shadow-none"
+                onChange={handleInputChange}
               />
             </InputGroup>
           </Form>
@@ -67,6 +78,7 @@ const MyNav = () => {
                     aria-label="Search"
                     placeholder="Cerca"
                     className="border-0 shadow-none"
+                    onChange={handleInputChange}
                   />
                   <Button
                     variant="outline-secondary"
