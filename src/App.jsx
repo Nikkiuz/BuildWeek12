@@ -14,7 +14,7 @@ function App() {
       </header>
       <main className="bg">
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/lavoro" element={<Lavoro />} />
         </Routes>

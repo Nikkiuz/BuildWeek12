@@ -104,7 +104,7 @@ const MyNav = () => {
         {/* NAVIGATION */}
         <Nav className="d-flex justify-content-center flex-grow-1 me-lg-5">
           <Link
-            to={'/home'}
+            to={'/'}
             className="nav-link d-flex flex-column align-items-center me-4"
           >
             <FaHome size={30} className="mb-1" />

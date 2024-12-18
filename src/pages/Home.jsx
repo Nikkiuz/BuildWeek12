@@ -18,10 +18,15 @@ const Home = () => {
           </div>
           <CreatePost />
           <PostersHome />
-          <FooterHome />
+          <div className=" d-lg-none">
+            <FooterHome />
+          </div>
         </Col>
         <Col lg={3} className=" d-none d-lg-block">
           <RightSidebarHome />
+          <div className=" d-none d-lg-block">
+            <FooterHome />
+          </div>
         </Col>
       </Row>
     </Container>
