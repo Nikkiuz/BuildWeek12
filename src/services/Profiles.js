@@ -56,7 +56,7 @@ const fetchUSERIDProfile = (userId, keyName = "Francois") => {
 };
 
 const updateProfile = (userData, keyName = "Francois") => {
-  return fetchAPI(API_ME_PROFILE, "PUT", keyName, userData);
+  return fetchAPI(API_USER_PROFILE, "PUT", keyName, userData);
 };
 
 // Esportiamo le funzioni
