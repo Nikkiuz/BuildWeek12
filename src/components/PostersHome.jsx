@@ -33,7 +33,6 @@ const PostersHome = () => {
             <div className="d-flex align-items-start">
               <img
                 src={post.userAvatar}
-                alt="Avatar"
                 width="70px"
                 className="rounded-circle me-3"
               />
@@ -45,7 +44,7 @@ const PostersHome = () => {
               </div>
             </div>
           </Card.Header>
-          <Card.Body className="d-flex">
+          <Card.Body className="d-flex justify-content-center flex-column">
             <Card.Text>{post.text}</Card.Text>
             {/* Immagine del post */}
             {post.image && (
