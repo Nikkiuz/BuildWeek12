@@ -64,7 +64,7 @@ const MyNav = () => {
 
           {/* SEARCH - MD SCREEN */}
           {InputSearch ? (
-            <div className="position-absolute top-0 start-0 w-100 bg-light p-3 d-flex align-items-center d-md-flex d-lg-none">
+            <div className="position-absolute top-0 start-0 w-100 bg-light p-3 d-flex align-items-center d-md-flex d-lg-none z-1">
               <Navbar.Brand className="me-3">
                 <img src={logo} alt="logo" width="40px" />
               </Navbar.Brand>

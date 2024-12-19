@@ -3,6 +3,7 @@ import '../assets/css/App.css'
 import avatar from '../assets/images/avatar.png'
 import { FaBookmark } from 'react-icons/fa'
 import { PiPlus } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
 
 const LeftSidebarHome = () => {
   return (
@@ -11,15 +12,19 @@ const LeftSidebarHome = () => {
         <Card.Header className="d-flex flex-column align-items-center bg-white p-0 pb-3">
           <div className="w-100 d-flex justify-content-center position-relative">
             <div className="back rounded-top-3"></div>
-            <Image
-              src={avatar}
-              alt="Profile"
-              roundedCircle
-              width="75px"
-              className="mb-2 mt-3 z-1 border border-2 border-white bg-black"
-            />
+            <Link to={'/profile'} className="z-1">
+              <Image
+                src={avatar}
+                alt="Profile"
+                roundedCircle
+                width="75px"
+                className="mb-2 mt-3 z-1 border border-2 border-white bg-black"
+              />
+            </Link>
           </div>
-          <Card.Title className="mb-1">Me cucino</Card.Title>
+          <Link to={'/profile'} className=" text-decoration-none text-black">
+            <Card.Title className="mb-1 nav-link-custom2">Me cucino</Card.Title>
+          </Link>
           <Card.Text className=" small">Web Developer</Card.Text>
         </Card.Header>
         <Card.Body>
@@ -31,7 +36,7 @@ const LeftSidebarHome = () => {
           </Card.Text>
         </Card.Body>
         <Card.Footer className=" bg-white">
-          <Card.Text className=" small d-flex align-items-center py-1 nav-link-custom">
+          <Card.Text className=" small d-flex align-items-center py-1 nav-link-custom2">
             <FaBookmark size={15} className="me-2 text-muted " /> Elementi
             salvati
           </Card.Text>
