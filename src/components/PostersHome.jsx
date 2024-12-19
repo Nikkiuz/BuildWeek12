@@ -1,29 +1,32 @@
-import { useState, useEffect } from 'react'
-import { Row, Col, Card, Button } from 'react-bootstrap'
-import { BsHandThumbsUp } from 'react-icons/bs'
-import { FaRegCommentDots } from 'react-icons/fa'
-import { IoPaperPlaneSharp } from 'react-icons/io5'
-import { RiRepeat2Line } from 'react-icons/ri'
+import { useState, useEffect } from "react";
+import { Row, Col, Card, Button } from "react-bootstrap";
+import { BsHandThumbsUp } from "react-icons/bs";
+import { FaRegCommentDots } from "react-icons/fa";
+import { IoPaperPlaneSharp } from "react-icons/io5";
+import { RiRepeat2Line } from "react-icons/ri";
 
 const PostersHome = () => {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch('https://striveschool-api.herokuapp.com/api/posts/', {
-      method: 'GET',
+    fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+      method: "GET",
       headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZjNlMDBlYTI4NjAwMTUyOGI5NDIiLCJpYXQiOjE3MzQzNDE2MDAsImV4cCI6MTczNTU1MTIwMH0.jO7oLFp7acRJwfd0NGcjFxxoldMKhHOUTM3GUTovd5c`,
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Risposta json dal server', data)
-        setPosts(data.slice(data.length - 20, data.length))
+        console.log(
+          "Risposta json dal server",
+          data.slice(data.length - 20, data.length)
+        );
+        setPosts(data.slice(data.length - 20, data.length));
       })
       .catch((error) => {
-        console.error('Errore nel recuperare i post:', error)
-      })
-  }, [])
+        console.error("Errore nel recuperare i post:", error);
+      });
+  }, []);
 
   return (
     <>
@@ -46,7 +49,6 @@ const PostersHome = () => {
           </Card.Header>
           <Card.Body className="d-flex justify-content-center flex-column">
             <Card.Text>{post.text}</Card.Text>
-            {/* Immagine del post */}
             {post.image && (
               <img src={post.image} alt="Post Image" className="img-fluid" />
             )}
@@ -89,7 +91,7 @@ const PostersHome = () => {
         </Card>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default PostersHome
+export default PostersHome;

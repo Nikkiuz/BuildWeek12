@@ -136,7 +136,7 @@ const InfoSection = () => {
         </Row>
       </Card.Body>
 
-      {/* Modale */}
+   
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Modifica Profilo</Modal.Title>
