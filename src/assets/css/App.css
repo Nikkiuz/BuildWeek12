@@ -19,5 +19,11 @@
   position: absolute;
   width: 100%;
   height: 55%;
-  background-color: gray;
+  background: rgb(160, 180, 183);
+  background: linear-gradient(
+    90deg,
+    rgba(160, 180, 183, 1) 52%,
+    rgba(217, 229, 231, 1) 66%,
+    rgba(191, 211, 214, 1) 77%
+  );
 }
