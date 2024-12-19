@@ -7,12 +7,12 @@ import RightSidebarHome from '../components/RightSidebarHome'
 
 const Home = () => {
   return (
-    <Container>
+    <Container className="px-0">
       <Row className="m-0 p-0">
-        <Col md={3} className=" d-none d-md-block">
+        <Col md={4} lg={3} className=" d-none d-md-block">
           <LeftSidebarHome />
         </Col>
-        <Col xs={12} md={9} lg={6}>
+        <Col xs={12} md={8} lg={6}>
           <div className="d-md-none d-flex justify-content-center mb-3">
             <LeftSidebarHome />
           </div>

@@ -133,7 +133,7 @@ const MyNav = () => {
               src={avatar}
               alt="avatar"
               width="35px"
-              className="rounded-circle"
+              className="rounded-circle bg-black"
             />
           </Link>
           <div className="d-flex mx-auto">

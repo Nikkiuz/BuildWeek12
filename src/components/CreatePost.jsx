@@ -53,7 +53,7 @@ const CreatePost = () => {
                   src={avatar}
                   alt="avatar"
                   width="45px"
-                  className="rounded-circle"
+                  className="rounded-circle bg-black"
                 />
               </Link>
             </Col>
