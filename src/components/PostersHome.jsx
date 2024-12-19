@@ -46,7 +46,6 @@ const PostersHome = () => {
           </Card.Header>
           <Card.Body className="d-flex justify-content-center flex-column">
             <Card.Text>{post.text}</Card.Text>
-            {/* Immagine del post */}
             {post.image && (
               <img src={post.image} alt="Post Image" className="img-fluid" />
             )}
