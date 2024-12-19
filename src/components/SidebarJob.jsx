@@ -5,7 +5,7 @@ import { LuSquarePen } from 'react-icons/lu'
 
 function SidebarJob() {
   return (
-    <ListGroup className=" rounded-3 border-3 border-black w-75">
+    <ListGroup className=" rounded-3 border-3 border-black w-100 d-flex align-items-center">
       <ListGroup.Item
         action
         className="d-flex align-items-center border-0 pt-4 small"
@@ -24,7 +24,7 @@ function SidebarJob() {
       </ListGroup.Item>
       <Button
         variant="outline-primary"
-        className=" rounded-5 d-flex align-items-center mt-3 py-3 justify-content-center"
+        className=" rounded-5 d-flex align-items-center mt-3 py-3 justify-content-center w-auto"
       >
         <LuSquarePen size={22} className="me-1" />
         <span className="small fw-semibold">Pubblica offerta gratuita</span>

@@ -148,14 +148,14 @@ const MyNav = () => {
                     src={avatar}
                     alt="avatar"
                     width="50px"
-                    className="rounded-4 mx-2 mb-2"
+                    className="rounded-circle mx-2 bg-black"
                   />
                   Cristiano Ronaldo
                 </Link>
                 <Link to={'/profile'}>
                   <Button
                     variant="outline-primary"
-                    className="px-5 py-0 rounded-5 mx-2"
+                    className="px-5 py-0 rounded-5 mx-2 mt-2"
                   >
                     Visualizza profilo
                   </Button>
