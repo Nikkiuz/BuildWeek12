@@ -1,62 +1,87 @@
-import { Alert, Button, Card, Container, Spinner } from 'react-bootstrap'
-import { AiOutlineEdit } from 'react-icons/ai'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchMeProfile } from '../redux/actions/userAction'
+import { useEffect, useState } from "react";
+import { Button, Card, Container, Modal, Form, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProfile } from "../redux/actions/userAction";
+import { AiOutlineEdit } from "react-icons/ai";
 
 const MyBio = () => {
-  const dispatch = useDispatch()
+  const [showModal, setShowModal] = useState(false);
+  const [description, setDescription] = useState("");
+  const dispatch = useDispatch();
 
-  // Recupero dati dallo store Redux
-  const profile = useSelector((state) => state.userReducer.meProfile) // Assumendo che "profile" contenga il profilo personale
-  const loading = useSelector((state) => state.userReducer.loading)
-  const error = useSelector((state) => state.userReducer.error)
+  const profile = useSelector((state) => state.userReducer.meProfile);
+  const loading = useSelector((state) => state.userReducer.loading);
 
-  // Chiamata API al montaggio del componente
   useEffect(() => {
-    dispatch(fetchMeProfile())
-  }, [dispatch])
+    if (profile) {
+      setDescription(profile.bio || ""); // Usa `bio` se è così che viene chiamato
+    }
+  }, [profile]);
 
-  // Stato di caricamento
+  const handleSave = () => {
+    dispatch(updateProfile({ bio: description })); // Manda l'aggiornamento del campo `bio`
+    setShowModal(false);
+  };
+
   if (loading) {
     return (
       <div className="text-center mt-5">
         <Spinner animation="border" variant="primary" />
       </div>
-    )
+    );
   }
 
-  // Stato di errore
-  if (error) {
-    return (
-      <div className="text-center mt-5">
-        <Alert variant="danger">Errore: {error}</Alert>
-      </div>
-    )
-  }
-
-  console.log('PROVA FILA : ', profile)
   return (
     <Container>
-      <Card className=" d-flex mt-4" style={{ backgroundColor: 'white' }}>
-        <Card.Header className="d-flex align-items-center">
-          <span className="fw-bold">Informazioni</span>
-          <div className="ms-auto">
-            <Button className="border-0" style={{ backgroundColor: '#F8F8F8' }}>
-              <AiOutlineEdit
-                className="text-black"
-                style={{
-                  width: '35px',
-                  height: '35px',
-                }}
-              />
-            </Button>
-          </div>
+      <Card className="mt-4">
+        <Card.Header className="d-flex justify-content-between align-items-center">
+          <span className="fw-bolder">Biografia</span>
+          <Button
+            className="bg-light border-0"
+            onClick={() => setShowModal(true)}
+          >
+            <AiOutlineEdit
+              style={{
+                color: "#181818",
+                width: "35px",
+                height: "35px",
+              }}
+            />
+          </Button>
         </Card.Header>
-        <Card.Body>{profile?.bio || 'Biografia'}</Card.Body>
+        <Card.Body>
+          {profile?.bio || "Nessuna biografia disponibile."}
+        </Card.Body>
       </Card>
-    </Container>
-  )
-}
 
-export default MyBio
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Modifica Biografia</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Descrizione</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Chiudi
+          </Button>
+          <Button variant="primary" onClick={handleSave}>
+            Salva
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Container>
+  );
+};
+
+export default MyBio;
