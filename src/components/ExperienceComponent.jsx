@@ -5,110 +5,166 @@ import {
   Row,
   CardBody,
   CardTitle,
-} from 'react-bootstrap'
-import { AiOutlineEdit } from 'react-icons/ai'
-import { FaPlus } from 'react-icons/fa'
-
+  Modal,
+  Form,
+  InputGroup,
+  FormControl,
+  Image,
+} from "react-bootstrap";
+import { AiOutlineEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import { useEffect, useState } from "react";
+import imgCasuale from "../services/ImgPexels";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import {
+  fetchExperiences,
+  createExperience,
+  updateExperience,
+} from "../redux/actions/experiencesAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const ExperienceComponent = () => {
-  const experience = [
-    {
-      title: 'Segretario',
-      place: 'Crejob',
-      date: 'set 2023 - dic 2023 - 4 mesi',
-      where: 'Valencia, Spagna - In sede',
-      competences:
-        'PowerPoint, Microsoft Office, Lingua Spagnola + 3 competenze',
-      cover:
-        'https://media.licdn.com/dms/image/v2/C4E0BAQEo581lOlrsRw/company-logo_100_100/company-logo_100_100/0/1646145244950?e=1742428800&v=beta&t=S1S8E3UHTbaoFg0O5hZ7GLqS23MtgfZ2IPD2wMapv-U',
-    },
-    {
-      title: 'Segretario',
-      place: 'Crejob',
-      date: 'set 2023 - dic 2023 - 4 mesi',
-      where: 'Valencia, Spagna - In sede',
-      competences:
-        'PowerPoint, Microsoft Office, Lingua Spagnola + 3 competenze',
-      cover:
-        'https://media.licdn.com/dms/image/v2/C4E0BAQEo581lOlrsRw/company-logo_100_100/company-logo_100_100/0/1646145244950?e=1742428800&v=beta&t=S1S8E3UHTbaoFg0O5hZ7GLqS23MtgfZ2IPD2wMapv-U',
-    },
-    {
-      title: 'Segretario',
-      place: 'Crejob',
-      date: 'set 2023 - dic 2023 - 4 mesi',
-      where: 'Valencia, Spagna - In sede',
-      competences:
-        'PowerPoint, Microsoft Office, Lingua Spagnola + 3 competenze',
-      cover:
-        'https://media.licdn.com/dms/image/v2/C4E0BAQEo581lOlrsRw/company-logo_100_100/company-logo_100_100/0/1646145244950?e=1742428800&v=beta&t=S1S8E3UHTbaoFg0O5hZ7GLqS23MtgfZ2IPD2wMapv-U',
-    },
-    {
-      title: 'Segretario',
-      place: 'Crejob',
-      date: 'set 2023 - dic 2023 - 4 mesi',
-      where: 'Valencia, Spagna - In sede',
-      competences:
-        'PowerPoint, Microsoft Office, Lingua Spagnola + 3 competenze',
-      cover:
-        'https://media.licdn.com/dms/image/v2/C4E0BAQEo581lOlrsRw/company-logo_100_100/company-logo_100_100/0/1646145244950?e=1742428800&v=beta&t=S1S8E3UHTbaoFg0O5hZ7GLqS23MtgfZ2IPD2wMapv-U',
-    },
-    {
-      title: 'Segretario',
-      place: 'Crejob',
-      date: 'set 2023 - dic 2023 - 4 mesi',
-      where: 'Valencia, Spagna - In sede',
-      competences:
-        'PowerPoint, Microsoft Office, Lingua Spagnola + 3 competenze',
-      cover:
-        'https://media.licdn.com/dms/image/v2/C4E0BAQEo581lOlrsRw/company-logo_100_100/company-logo_100_100/0/1646145244950?e=1742428800&v=beta&t=S1S8E3UHTbaoFg0O5hZ7GLqS23MtgfZ2IPD2wMapv-U',
-    },
-    {
-      title: 'Segretario',
-      place: 'Crejob',
-      date: 'set 2023 - dic 2023 - 4 mesi',
-      where: 'Valencia, Spagna - In sede',
-      competences:
-        'PowerPoint, Microsoft Office, Lingua Spagnola + 3 competenze',
-      cover:
-        'https://media.licdn.com/dms/image/v2/C4E0BAQEo581lOlrsRw/company-logo_100_100/company-logo_100_100/0/1646145244950?e=1742428800&v=beta&t=S1S8E3UHTbaoFg0O5hZ7GLqS23MtgfZ2IPD2wMapv-U',
-    },
-  ]
+  const [showModal, setShowModal] = useState(false);
+  const [modalMode, setModalMode] = useState("create"); // "create" or "edit"
+  const [selectedExperience, setSelectedExperience] = useState(null);
+  const [formData, setFormData] = useState({
+    role: "",
+    company: "",
+    startDate: null,
+    endDate: null,
+    area: "",
+    image: "",
+  });
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const dispatch = useDispatch();
+  const experience = useSelector(
+    (state) => state.experiencesReducer.experiences
+  );
+
+  useEffect(() => {
+    dispatch(fetchExperiences());
+  }, [dispatch]);
+
+  const handleEditActivity = (index) => {
+    const exp = experience[index];
+    setSelectedExperience(exp);
+    setFormData({
+      role: exp.role,
+      company: exp.company,
+      startDate: new Date(exp.startDate),
+      endDate: new Date(exp.endDate),
+      area: exp.area,
+      image: exp.image,
+    });
+    setModalMode("edit");
+    setShowModal(true);
+  };
+
+  const handleCreateActivity = () => {
+    setSelectedExperience(null);
+    setFormData({
+      role: "",
+      company: "",
+      startDate: null,
+      endDate: null,
+      area: "",
+      image: "",
+    });
+    setModalMode("create");
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => setShowModal(false);
+
+  const fetchRandomImage = (query) => {
+    const indexRandom = Math.floor(Math.random() * 11);
+    imgCasuale(query)
+      .then((arrayImg) => {
+        const url = arrayImg[indexRandom]?.src?.large || "";
+        setFormData((prev) => ({ ...prev, image: url }));
+      })
+      .catch((error) => {
+        console.error("Errore durante il recupero dell'immagine:", error);
+      });
+  };
+
+  const handleSaveExperience = () => {
+    const payload = {
+      role: formData.role,
+      company: formData.company,
+      startDate: formData.startDate ? formData.startDate.toISOString() : null,
+      endDate: formData.endDate ? formData.endDate.toISOString() : null,
+      area: formData.area,
+      image: formData.image,
+    };
+
+    if (modalMode === "create") {
+      dispatch(createExperience(payload));
+    } else if (modalMode === "edit" && selectedExperience) {
+      dispatch(updateExperience(selectedExperience._id, payload));
+    }
+    setShowModal(false);
+  };
 
   return (
     <Container>
-      <Card className=" d-flex mt-4" style={{ backgroundColor: 'white' }}>
+      <Card className="d-flex mt-4" style={{ backgroundColor: "white" }}>
         <Card.Header className="d-flex align-items-center">
           <span className="fw-bold">Esperienza</span>
           <div className="ms-auto">
-            <Button className='mx-2'>
-              <FaPlus />
-            </Button>
-            <Button>
-              <AiOutlineEdit
-              />
+            <Button className="mx-2" onClick={handleCreateActivity}>
+              Crea Esperienza
             </Button>
           </div>
         </Card.Header>
         <Card.Body>
           <Row xs={1} sm={2} md={2} lg={1} className="g-1">
-            {experience.map((exp, index) => (
+            {experience?.map((exp, index) => (
               <Card key={index}>
                 <CardBody className="d-flex">
-                  <div className="">
-                    <CardTitle className="fw-bold">{exp.title}</CardTitle>
-                    <Card.Img src={exp.cover} style={{ width: '100px' }} />
+                  <div className="align-content-center">
+                    <Card.Img src={exp.image} style={{ width: "100px" }} />
                   </div>
-                  <div>
-                    <Card.Text className="mx-3 mt-1">{exp.place}</Card.Text>
-                    <Card.Text className="mx-3 my-0" style={{ opacity: '0.7' }}>
-                      {exp.date}
+                  <div className="mx-3">
+                    <CardTitle className="fw-bold">{exp.role}</CardTitle>
+                    <Card.Text
+                      className="fw-medium mt-1"
+                      style={{ marginBottom: "4px" }}
+                    >
+                      Azienda : {exp.company}
                     </Card.Text>
-                    <Card.Text className="mx-3 my-0" style={{ opacity: '0.7' }}>
-                      {exp.where}
+                    <Card.Text className="my-0" style={{ opacity: "0.7" }}>
+                      {exp.startDate}
                     </Card.Text>
-                    <Card.Text className="mx-3 fw-bold">
-                      {exp.competences}
+                    <Card.Text className="my-0" style={{ opacity: "0.7" }}>
+                      {exp.area}
                     </Card.Text>
+                    <Card.Text className="fw-bold">{exp.description}</Card.Text>
+                  </div>
+                  <div className="d-flex justify-content-end align-items-start">
+                    <AiOutlineEdit
+                      className="me-4"
+                      style={{
+                        color: "#181818",
+                        width: "24px",
+                        height: "24px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleEditActivity(index)}
+                    />
+                    <MdDeleteForever
+                      style={{
+                        color: "#181818",
+                        width: "24px",
+                        height: "24px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() =>
+                        console.log(`Deleting experience with index ${index}`)
+                      }
+                    />
                   </div>
                 </CardBody>
               </Card>
@@ -117,8 +173,127 @@ const ExperienceComponent = () => {
         </Card.Body>
         <Card.Footer>Mostra di più</Card.Footer>
       </Card>
-    </Container>
-  )
-}
 
-export default ExperienceComponent
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            {modalMode === "create" ? "Crea Esperienza" : "Modifica Esperienza"}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="formRole">
+              <Form.Label>Ruolo</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.role}
+                onChange={(e) =>
+                  setFormData({ ...formData, role: e.target.value })
+                }
+                placeholder="Inserisci il ruolo"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formCompany">
+              <Form.Label>Azienda</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Inserisci il nome dell'azienda"
+                value={formData.company || ""}
+                onChange={(e) =>
+                  setFormData({ ...formData, company: e.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formStartDate">
+              <Form.Label>Data Inizio</Form.Label>
+              <DatePicker
+                selected={formData.startDate}
+                onChange={(date) =>
+                  setFormData({ ...formData, startDate: date })
+                }
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Seleziona la data di inizio"
+                className="form-control"
+                showYearDropdown
+                showMonthDropdown
+                dropdownMode="select"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formEndDate">
+              <Form.Label>Data Fine</Form.Label>
+              <DatePicker
+                selected={formData.endDate}
+                onChange={(date) => setFormData({ ...formData, endDate: date })}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="Seleziona la data di fine"
+                className="form-control"
+                showYearDropdown
+                showMonthDropdown
+                dropdownMode="select"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formArea">
+              <Form.Label>Area</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Inserisci l'area"
+                value={formData.area || ""}
+                onChange={(e) =>
+                  setFormData({ ...formData, area: e.target.value })
+                }
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formCover">
+              <Form.Label>URL immagine</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Inserisci l'URL dell'immagine"
+                value={formData.image}
+                onChange={(e) =>
+                  setFormData({ ...formData, image: e.target.value })
+                }
+              />
+              <div className="d-flex mt-3">
+                <InputGroup>
+                  <FormControl
+                    type="search"
+                    placeholder="Cerca"
+                    aria-label="Search"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  <Button
+                    variant="outline-primary"
+                    onClick={() => fetchRandomImage(searchTerm)}
+                  >
+                    Cerca
+                  </Button>
+                </InputGroup>
+              </div>
+              {formData.image && (
+                <div className="mt-3">
+                  <Image
+                    src={formData.image}
+                    alt="Anteprima immagine"
+                    fluid
+                    style={{ maxHeight: "200px" }}
+                  />
+                </div>
+              )}
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Chiudi
+          </Button>
+          <Button variant="primary" onClick={handleSaveExperience}>
+            {modalMode === "create" ? "Crea" : "Salva"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </Container>
+  );
+};
+
+export default ExperienceComponent;

@@ -1,114 +1,111 @@
 const API_ENDPOINT = "https://striveschool-api.herokuapp.com/api";
 const API_POST = "/posts";
 
-// Lista chiavi del team più forte
+// Chiavi utente
+const API_KEYS = {
+  Francois:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZWU1ZDBlYTI4NjAwMTUyOGI5M2YiLCJpYXQiOjE3MzQzNDAxODksImV4cCI6MTczNTU0OTc4OX0.F0lG1ewGLskBKdNx05Q2uqDt-ZhuxKgR6M70igd-vs8",
+  Tommaso:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZWUyNDBlYTI4NjAwMTUyOGI5M2UiLCJpYXQiOjE3MzQzNDAxMzMsImV4cCI6MTczNTU0OTczM30.md8JPlmC0A2aU2EjfOWOWkJl_7-KZoYs1j2LwK-s3PA",
+  Michele:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZjNlMDBlYTI4NjAwMTUyOGI5NDIiLCJpYXQiOjE3MzQzNDE2MDAsImV4cCI6MTczNTU1MTIwMH0.jO7oLFp7acRJwfd0NGcjFxxoldMKhHOUTM3GUTovd5c",
+  Nicolò:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZTlkMTBlYTI4NjAwMTUyOGI5MmQiLCJpYXQiOjE3MzQzMzkwMjUsImV4cCI6MTczNTU0ODYyNX0.7j_kz0gCqcTL7QeIqsy2QNIbHryyCT-_C5Hr-PgKxBs",
+  Omar: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZWRlODBlYTI4NjAwMTUyOGI5M2MiLCJpYXQiOjE3MzQzNTg0MDUsImV4cCI6MTczNTU2ODAwNX0.vpfWJavN-m6v147xRxAIKfJGjPtysQ7_yfobcwjsEAQ",
+};
 
-const Francois_Key =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZWU1ZDBlYTI4NjAwMTUyOGI5M2YiLCJpYXQiOjE3MzQzNDAxODksImV4cCI6MTczNTU0OTc4OX0.F0lG1ewGLskBKdNx05Q2uqDt-ZhuxKgR6M70igd-vs8";
+const USER_KEYS = {
+  Francois: "zPhoenix",
+  Tommaso: "tommaso.panciroli",
+  Michele: "Mich3le",
+  Nicolò: "nikkiuz",
+  Omar: "prova",
+};
 
-const Tommaso_Key =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZWUyNDBlYTI4NjAwMTUyOGI5M2UiLCJpYXQiOjE3MzQzNDAxMzMsImV4cCI6MTczNTU0OTczM30.md8JPlmC0A2aU2EjfOWOWkJl_7-KZoYs1j2LwK-s3PA";
+// Recupera la chiave API per un utente specifico
+const getApiKey = (user) => {
+  if (!API_KEYS[user]) {
+    throw new Error(`API Key per ${user} non trovata`);
+  }
+  return API_KEYS[user];
+};
 
-const Michele_Key =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZjNlMDBlYTI4NjAwMTUyOGI5NDIiLCJpYXQiOjE3MzQzNDE2MDAsImV4cCI6MTczNTU1MTIwMH0.jO7oLFp7acRJwfd0NGcjFxxoldMKhHOUTM3GUTovd5c";
+// Funzione generica per le chiamate API
+const apiCall = (endpoint, method = "GET", user = "Francois", body = null) => {
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${getApiKey(user)}`,
+  };
 
-const Nicolò_Key =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZTlkMTBlYTI4NjAwMTUyOGI5MmQiLCJpYXQiOjE3MzQzMzkwMjUsImV4cCI6MTczNTU0ODYyNX0.7j_kz0gCqcTL7QeIqsy2QNIbHryyCT-_C5Hr-PgKxBs";
-
-const Omar_Key =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZWRlODBlYTI4NjAwMTUyOGI5M2MiLCJpYXQiOjE3MzQzNTg0MDUsImV4cCI6MTczNTU2ODAwNX0.vpfWJavN-m6v147xRxAIKfJGjPtysQ7_yfobcwjsEAQ";
-
-// Ritorna una lista di post esistenti
-
-const allPost = () => {
-  return fetch(`${API_ENDPOINT}${API_POST}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${Francois_Key}`,
-    },
+  return fetch(`${API_ENDPOINT}${endpoint}`, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : null,
   }).then((response) => {
     if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
+      throw new Error(`Errore: ${response.status} ${response.statusText}`);
     }
     return response.json();
   });
 };
 
-// Crea un nuovo post. NOTA: ogni utente ha il permesso di modificare solo i propri post
+// API specifiche
+const allPosts = (user = "Francois") =>
+  apiCall(API_POST, "GET", user)
+    .then((data) => data)
+    .catch((err) => {
+      throw err;
+    });
 
-const createNewPost = (userData) => {
-  return fetch(`${API_ENDPOINT}/${API_POST}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${Francois_Key}`,
-    },
-    body: JSON.stringify(userData),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    return response.json();
-  });
-};
+const allPostsProfile = (user = "Francois") =>
+  apiCall(API_POST, "GET", user)
+    .then((data) => {
+      const dataFinal = [];
+      data.forEach((element) => {
+        if (element.user.username === USER_KEYS[user]) {
+          dataFinal.push(element);
+        }
+      });
+      return dataFinal;
+    })
+    .catch((err) => {
+      throw err;
+    });
 
-// Ritorna uno specifico post
+const createPost = (postData, user = "Francois") =>
+  apiCall(API_POST, "POST", user, postData)
+    .then((data) => data)
+    .catch((err) => {
+      throw err;
+    });
 
-const trovaSpecificoPost = (postID) => {
-  return fetch(`${API_ENDPOINT}${API_POST}/${postID}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${Francois_Key}`,
-    },
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    return response.json();
-  });
-};
+const getPostById = (postId, user = "Francois") =>
+  apiCall(`${API_POST}/${postId}`, "GET", user)
+    .then((data) => data)
+    .catch((err) => {
+      throw err;
+    });
 
-// Modifica uno specifico post
+const updatePost = (postId, postData, user = "Francois") =>
+  apiCall(`${API_POST}/${postId}`, "PUT", user, postData)
+    .then((data) => data)
+    .catch((err) => {
+      throw err;
+    });
 
-const modificaSpecificoPost = (postID) => {
-  return fetch(`${API_ENDPOINT}${API_POST}/${postID}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${Francois_Key}`,
-    },
-    body: JSON.stringify(userData),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    return response.json();
-  });
-};
+const deletePost = (postId, user = "Francois") =>
+  apiCall(`${API_POST}/${postId}`, "DELETE", user)
+    .then((data) => data)
+    .catch((err) => {
+      throw err;
+    });
 
-// Cancella uno specifico postModello
-
-const deleteSpecificoPost = (userId, expId) => {
-  return fetch(`${API_ENDPOINT}${API_POST}/${postID}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${Francois_Key}`,
-    },
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-    return response.json();
-  });
-};
-
+// Esportazione delle funzioni
 export default {
-  allPost,
-  createNewPost,
-  trovaSpecificoPost,
-  modificaSpecificoPost,
-  deleteSpecificoPost,
+  allPosts,
+  allPostsProfile,
+  createPost,
+  getPostById,
+  updatePost,
+  deletePost,
 };
