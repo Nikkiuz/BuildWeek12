@@ -18,7 +18,7 @@ const PostersHome = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log('Risposta json dal server', data)
-        setPosts(data)
+        setPosts(data.slice(data.length - 20, data.length))
       })
       .catch((error) => {
         console.error('Errore nel recuperare i post:', error)

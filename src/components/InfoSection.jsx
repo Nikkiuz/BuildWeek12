@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Button,
   Card,
@@ -10,50 +10,50 @@ import {
   Alert,
   Modal,
   Form,
-} from "react-bootstrap";
-import { AiOutlineEdit } from "react-icons/ai";
-import { fetchMeProfile, updateProfile } from "../redux/actions/userAction";
+} from 'react-bootstrap'
+import { AiOutlineEdit } from 'react-icons/ai'
+import { fetchMeProfile, updateProfile } from '../redux/actions/userAction'
 
 const InfoSection = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
 
-  const profile = useSelector((state) => state.meProfile);
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
+  const profile = useSelector((state) => state.userReducer.meProfile)
+  const loading = useSelector((state) => state.userReducer.loading)
+  const error = useSelector((state) => state.userReducer.error)
 
   const [formData, setFormData] = useState({
-    name: "",
-    surname: "",
-    title: "",
-    area: "",
-  });
+    name: '',
+    surname: '',
+    title: '',
+    area: '',
+  })
 
   useEffect(() => {
-    dispatch(fetchMeProfile());
-  }, [dispatch]);
+    dispatch(fetchMeProfile())
+  }, [dispatch])
 
   useEffect(() => {
     if (profile) {
       setFormData({
-        name: profile.name || "",
-        surname: profile.surname || "",
-        title: profile.title || "",
-        area: profile.area || "",
-      });
+        name: profile.name || '',
+        surname: profile.surname || '',
+        title: profile.title || '',
+        area: profile.area || '',
+      })
     }
-  }, [profile]);
+  }, [profile])
 
   // Funzioni per aprire e chiudere la modale
-  const handleOpenModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleOpenModal = () => setShowModal(true)
+  const handleCloseModal = () => setShowModal(false)
 
   // Funzione per gestire i cambiamenti del form
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   // Funzione per salvare i dati
   const handleSave = () => {
@@ -62,18 +62,18 @@ const InfoSection = () => {
       surname: formData.surname,
       title: formData.title,
       area: formData.area,
-    };
+    }
 
-    dispatch(updateProfile(updatedData));
-    handleCloseModal();
-  };
+    dispatch(updateProfile(updatedData))
+    handleCloseModal()
+  }
 
   if (loading) {
     return (
       <div className="text-center mt-5">
         <Spinner animation="border" variant="primary" />
       </div>
-    );
+    )
   }
 
   if (error) {
@@ -81,7 +81,7 @@ const InfoSection = () => {
       <div className="text-center mt-5">
         <Alert variant="danger">Errore: {error}</Alert>
       </div>
-    );
+    )
   }
 
   return (
@@ -91,20 +91,20 @@ const InfoSection = () => {
           <Button className="editIcon" onClick={handleOpenModal}>
             <AiOutlineEdit
               style={{
-                color: "#181818",
-                width: "35px",
-                height: "35px",
+                color: '#181818',
+                width: '35px',
+                height: '35px',
               }}
             />
           </Button>
           <Col sm={6} className="mt-5">
             <h3 className="mb-0">
-              {profile?.name + " " + profile?.surname || "Nome Cognome"}
+              {profile?.name + ' ' + profile?.surname || 'Nome Cognome'}
             </h3>
             <p className="fw-light mt-0 mb-1">
-              {profile?.title || "Posizione Lavorativa"}
+              {profile?.title || 'Posizione Lavorativa'}
             </p>
-            <p className="fw-light mt-0">{profile?.area || "Posizione"}</p>
+            <p className="fw-light mt-0">{profile?.area || 'Posizione'}</p>
           </Col>
           <Col sm={6} className="mt-5 text-center">
             <Row className="flex-column">
@@ -112,10 +112,10 @@ const InfoSection = () => {
                 <Col key={index} className="d-flex align-items-center mb-2">
                   <Image
                     className="rounded-circle"
-                    src={edu.image || "https://placedog.net/40/40"}
-                    style={{ width: "40px", height: "40px" }}
+                    src={edu.image || 'https://placedog.net/40/40'}
+                    style={{ width: '40px', height: '40px' }}
                   />
-                  <span className="ms-2">{edu.school || "SCUOLA"}</span>
+                  <span className="ms-2">{edu.school || 'SCUOLA'}</span>
                 </Col>
               ))}
             </Row>
@@ -191,7 +191,7 @@ const InfoSection = () => {
         </Modal.Footer>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default InfoSection;
+export default InfoSection

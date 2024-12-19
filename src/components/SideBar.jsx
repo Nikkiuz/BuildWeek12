@@ -17,10 +17,10 @@ const Sidebar = () => {
   const dispatch = useDispatch()
 
   // Recupero dei dati dallo store Redux
-  const meProfile = useSelector((state) => state.meProfile)
-  const allProfile = useSelector((state) => state.allProfile)
-  const loading = useSelector((state) => state.loading)
-  const error = useSelector((state) => state.error)
+  const meProfile = useSelector((state) => state.userReducer.meProfile)
+  const allProfile = useSelector((state) => state.userReducer.allProfile)
+  const loading = useSelector((state) => state.userReducer.loading)
+  const error = useSelector((state) => state.userReducer.error)
 
   // Chiamata API al montaggio del componente
   useEffect(() => {

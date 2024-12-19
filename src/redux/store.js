@@ -1,21 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import userReducer from './reducers/userReducer'
 import searchReducer from './features/searchSlice'
 
+const allReducers = combineReducers({ userReducer, searchReducer })
+
 const store = configureStore({
-  reducer: {
-    user: userReducer,
-    search: searchReducer,
-  },
+  reducer: allReducers,
 })
 
 export default store
-
-// import { configureStore } from '@reduxjs/toolkit'
-// import userReducer from './reducers/userReducer'
-
-// const store = configureStore({
-//   reducer: userReducer,
-// })
-
-// export default store

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   Button,
   Card,
@@ -10,53 +10,55 @@ import {
   Form,
   InputGroup,
   FormControl,
-} from "react-bootstrap";
-import InfoSection from "./InfoSection";
-import { AiFillCamera } from "react-icons/ai";
-import "../assets/css/HeroSection.css";
-import imgCasuale from "../services/ImgPexels";
+} from 'react-bootstrap'
+import InfoSection from './InfoSection'
+import { AiFillCamera } from 'react-icons/ai'
+import '../assets/css/HeroSection.css'
+import imgCasuale from '../services/ImgPexels'
 import {
   fetchMeProfile,
   updateCopertinaProfile,
   updateProfile,
-} from "../redux/actions/userAction";
-import { useSelector, useDispatch } from "react-redux";
+} from '../redux/actions/userAction'
+import { useSelector, useDispatch } from 'react-redux'
 
 //CHIEDERE A STEFANO COME FARE CON L'IMMAGINE PROFILO
 
 const HeroSection = () => {
-  const [urlImgCopertina, setUrlImgCopertina] = useState("");
-  const [showModal, setShowModal] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [urlImgCopertina, setUrlImgCopertina] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const dispatch = useDispatch();
-  const copertinaProfileUrl = useSelector((state) => state.copertinaProfileUrl);
+  const dispatch = useDispatch()
+  const copertinaProfileUrl = useSelector(
+    (state) => state.userReducer.copertinaProfileUrl
+  )
 
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true)
+  const handleCloseModal = () => setShowModal(false)
 
   const fetchRandomImage = (query) => {
-    const indexRandom = Math.floor(Math.random() * 11);
+    const indexRandom = Math.floor(Math.random() * 11)
     imgCasuale(query)
       .then((arrayImg) => {
-        const url = arrayImg[indexRandom]?.src?.large || "";
-        setUrlImgCopertina(url);
+        const url = arrayImg[indexRandom]?.src?.large || ''
+        setUrlImgCopertina(url)
       })
       .catch((error) => {
-        console.error("Errore durante il recupero dell'immagine:", error);
-      });
-  };
+        console.error("Errore durante il recupero dell'immagine:", error)
+      })
+  }
 
   const setNewImgBackGround = () => {
     if (urlImgCopertina) {
-      console.log("Nuova immagine per copertina:", urlImgCopertina);
-      dispatch(updateCopertinaProfile(urlImgCopertina));
+      console.log('Nuova immagine per copertina:', urlImgCopertina)
+      dispatch(updateCopertinaProfile(urlImgCopertina))
     }
-  };
+  }
 
   useEffect(() => {
-    console.log("Stato aggiornato copertinaProfileUrl:", copertinaProfileUrl);
-  }, [copertinaProfileUrl]);
+    console.log('Stato aggiornato copertinaProfileUrl:', copertinaProfileUrl)
+  }, [copertinaProfileUrl])
 
   return (
     <Container className="rounded mt-3">
@@ -66,24 +68,24 @@ const HeroSection = () => {
             <Card.Img
               variant="top"
               src={copertinaProfileUrl}
-              style={{ height: "200px", width: "100%", objectFit: "cover" }}
+              style={{ height: '200px', width: '100%', objectFit: 'cover' }}
             />
             <InfoSection />
             <Col className="profileDiv">
               <Image
                 src="https://placedog.net/180/180"
                 className="rounded-circle profilePic"
-                style={{ border: "5px solid white" }}
+                style={{ border: '5px solid white' }}
               />
             </Col>
             <Col>
               <Button className="cameraProfile rounded-circle">
                 <AiFillCamera
                   style={{
-                    color: "#2A6097",
-                    width: "18px",
-                    height: "18px",
-                    margin: "5px",
+                    color: '#2A6097',
+                    width: '18px',
+                    height: '18px',
+                    margin: '5px',
                   }}
                 />
               </Button>
@@ -95,10 +97,10 @@ const HeroSection = () => {
               >
                 <AiFillCamera
                   style={{
-                    color: "#2A6097",
-                    width: "18px",
-                    height: "18px",
-                    margin: "5px",
+                    color: '#2A6097',
+                    width: '18px',
+                    height: '18px',
+                    margin: '5px',
                   }}
                 />
               </Button>
@@ -144,8 +146,8 @@ const HeroSection = () => {
           <Button
             variant="success"
             onClick={() => {
-              setNewImgBackGround();
-              handleCloseModal();
+              setNewImgBackGround()
+              handleCloseModal()
             }}
           >
             Salva
@@ -156,7 +158,7 @@ const HeroSection = () => {
         </Modal.Footer>
       </Modal>
     </Container>
-  );
-};
+  )
+}
 
-export default HeroSection;
+export default HeroSection
