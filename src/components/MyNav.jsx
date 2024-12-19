@@ -96,7 +96,7 @@ const MyNav = () => {
               onClick={handleSearchExpand}
             >
               <FaSearch size={28} className="mb-1 text-muted" />
-              <span className="fs-6">Cerca</span>
+              <span className="fs-6 d-none d-lg-block">Cerca</span>
             </Nav.Link>
           )}
         </div>
@@ -108,26 +108,26 @@ const MyNav = () => {
             className="nav-link d-flex flex-column align-items-center me-4"
           >
             <FaHome size={30} className="mb-1" />
-            <span className="fs-6">Home</span>
+            <span className="fs-6 d-none d-lg-block">Home</span>
           </Link>
           <Link
             to={'/rete'}
             className="nav-link d-flex flex-column align-items-center me-4"
           >
             <FaUserFriends size={30} className="mb-1" />
-            <span className="fs-6">Rete</span>
+            <span className="fs-6 d-none d-lg-block">Rete</span>
           </Link>
           <Link
             to={'/lavoro'}
             className="nav-link d-flex flex-column align-items-center me-4"
           >
             <FaBriefcase size={30} className="mb-1" />
-            <span className="fs-6">Lavoro</span>
+            <span className="fs-6 d-none d-lg-block">Lavoro</span>
           </Link>
         </Nav>
 
         {/* PROFILE SECTION */}
-        <Button className="d-flex flex-column bg-transparent text-dark border-0 align-items-center">
+        <Button className="d-flex flex-lg-column align-items-center bg-transparent text-dark border-0 ">
           <Link to={'/profile'}>
             <img
               src={avatar}
@@ -137,7 +137,7 @@ const MyNav = () => {
             />
           </Link>
           <div className="d-flex mx-auto">
-            Tu
+            <span className="d-none d-lg-block">Tu</span>
             <NavDropdown align="end" className="ms-1">
               <div className="d-flex flex-column">
                 <Link
