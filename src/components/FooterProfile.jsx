@@ -58,7 +58,7 @@ const FooterProfile = () => {
         </Nav>
       </Col>
       <Col md={3}>
-        <Nav className="small flex-column">
+        <Nav className="small flex-column mx-1">
           <div className="d-flex">
             <FaCircleQuestion size={22} />
             <div className="ms-2">
@@ -88,7 +88,7 @@ const FooterProfile = () => {
           </div>
         </Nav>
       </Col>
-      <Col md={3} className="text-start">
+      <Col md={3} className="text-start mx-1 mx-sm-0">
         <p className="mb-1 mt-2 small">Seleziona lingua</p>
         <Dropdown drop="up" className=" bg-light">
           <Dropdown.Toggle
