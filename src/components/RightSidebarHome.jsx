@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Card, Row, Col, Button } from 'react-bootstrap'
-import { BsInfoSquareFill, BsHandThumbsUp } from 'react-icons/bs'
-import { FaRegCommentDots } from 'react-icons/fa'
-import { RiRepeat2Line } from 'react-icons/ri'
-import { IoPaperPlaneSharp } from 'react-icons/io5'
+import { Card, } from 'react-bootstrap'
+import { BsInfoSquareFill } from 'react-icons/bs'
+
 
 const RightSidebarHome = () => {
   const [posts, setPosts] = useState([])
