@@ -4,7 +4,7 @@ import {
   fetchJobsStart,
   fetchJobsSuccess,
   fetchJobsFailure,
-} from '../redux/features/searchSlice'
+} from '../redux/reducers/searchReducer'
 import { Card, Button } from 'react-bootstrap'
 
 const CardJob = () => {
