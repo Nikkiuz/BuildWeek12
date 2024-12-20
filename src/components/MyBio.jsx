@@ -1,34 +1,34 @@
-import { useEffect, useState } from "react";
-import { Button, Card, Container, Modal, Form, Spinner } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "../redux/actions/userAction";
-import { AiOutlineEdit } from "react-icons/ai";
+import { useEffect, useState } from 'react'
+import { Button, Card, Container, Modal, Form, Spinner } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateProfile } from '../redux/actions/userAction'
+import { FaPen } from 'react-icons/fa'
 
 const MyBio = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [description, setDescription] = useState("");
-  const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false)
+  const [description, setDescription] = useState('')
+  const dispatch = useDispatch()
 
-  const profile = useSelector((state) => state.userReducer.meProfile);
-  const loading = useSelector((state) => state.userReducer.loading);
+  const profile = useSelector((state) => state.userReducer.meProfile)
+  const loading = useSelector((state) => state.userReducer.loading)
 
   useEffect(() => {
     if (profile) {
-      setDescription(profile.bio || ""); // Usa `bio` se è così che viene chiamato
+      setDescription(profile.bio || '') // Usa `bio` se è così che viene chiamato
     }
-  }, [profile]);
+  }, [profile])
 
   const handleSave = () => {
-    dispatch(updateProfile({ bio: description })); // Manda l'aggiornamento del campo `bio`
-    setShowModal(false);
-  };
+    dispatch(updateProfile({ bio: description })) // Manda l'aggiornamento del campo `bio`
+    setShowModal(false)
+  }
 
   if (loading) {
     return (
       <div className="text-center mt-5">
         <Spinner animation="border" variant="primary" />
       </div>
-    );
+    )
   }
 
   return (
@@ -40,17 +40,11 @@ const MyBio = () => {
             className="bg-light border-0"
             onClick={() => setShowModal(true)}
           >
-            <AiOutlineEdit
-              style={{
-                color: "#181818",
-                width: "35px",
-                height: "35px",
-              }}
-            />
+            <FaPen className=" text-black" />
           </Button>
         </Card.Header>
         <Card.Body>
-          {profile?.bio || "Nessuna biografia disponibile."}
+          {profile?.bio || 'Nessuna biografia disponibile.'}
         </Card.Body>
       </Card>
 
@@ -81,7 +75,7 @@ const MyBio = () => {
         </Modal.Footer>
       </Modal>
     </Container>
-  );
-};
+  )
+}
 
-export default MyBio;
+export default MyBio

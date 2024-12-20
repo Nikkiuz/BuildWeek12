@@ -11,8 +11,8 @@ import {
   Modal,
   Form,
 } from 'react-bootstrap'
-import { AiOutlineEdit } from 'react-icons/ai'
 import { fetchMeProfile, updateProfile } from '../redux/actions/userAction'
+import { FaPen } from 'react-icons/fa'
 
 const InfoSection = () => {
   const dispatch = useDispatch()
@@ -88,14 +88,8 @@ const InfoSection = () => {
     <>
       <Card.Body className="position-relative">
         <Row>
-          <Button className="editIcon" onClick={handleOpenModal}>
-            <AiOutlineEdit
-              style={{
-                color: '#181818',
-                width: '35px',
-                height: '35px',
-              }}
-            />
+          <Button className="editIcon bg-transparent" onClick={handleOpenModal}>
+            <FaPen className=" text-black" />
           </Button>
           <Col sm={6} className="mt-5">
             <h3 className="mb-0">
@@ -136,7 +130,6 @@ const InfoSection = () => {
         </Row>
       </Card.Body>
 
-   
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Modifica Profilo</Modal.Title>

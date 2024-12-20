@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   CardBody,
   Container,
@@ -8,101 +8,102 @@ import {
   InputGroup,
   FormControl,
   Image,
-} from "react-bootstrap";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import { AiOutlineEdit } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+} from 'react-bootstrap'
+import Button from 'react-bootstrap/Button'
+import Card from 'react-bootstrap/Card'
+import { AiOutlineEdit } from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   createPost,
   deletePost,
   fetchPostsProfile,
   updatePost,
-} from "../redux/actions/activitiesAction";
-import "../assets/css/Activities.css";
-import imgCasuale from "../services/ImgPexels";
-import { MdDeleteForever } from "react-icons/md";
+} from '../redux/actions/activitiesAction'
+import '../assets/css/Activities.css'
+import imgCasuale from '../services/ImgPexels'
+import { MdDeleteForever } from 'react-icons/md'
+import { FaPen } from 'react-icons/fa'
 
 const ActivitiesComponent = () => {
-  const dispatch = useDispatch();
-  const [showModal, setShowModal] = useState(false);
-  const [currentActivity, setCurrentActivity] = useState(null);
-  const [formData, setFormData] = useState({ text: "", image: "" });
-  const [searchTerm, setSearchTerm] = useState("");
-  const posts = useSelector((state) => state.postsReducer.posts);
-  const [localPosts, setLocalPosts] = useState([]);
+  const dispatch = useDispatch()
+  const [showModal, setShowModal] = useState(false)
+  const [currentActivity, setCurrentActivity] = useState(null)
+  const [formData, setFormData] = useState({ text: '', image: '' })
+  const [searchTerm, setSearchTerm] = useState('')
+  const posts = useSelector((state) => state.postsReducer.posts)
+  const [localPosts, setLocalPosts] = useState([])
 
   useEffect(() => {
-    setLocalPosts(posts);
-  }, [posts]);
+    setLocalPosts(posts)
+  }, [posts])
 
   const fetchRandomImage = (query) => {
-    const indexRandom = Math.floor(Math.random() * 11);
+    const indexRandom = Math.floor(Math.random() * 11)
     imgCasuale(query)
       .then((arrayImg) => {
-        const url = arrayImg[indexRandom]?.src?.large || "";
-        setFormData((prev) => ({ ...prev, image: url }));
+        const url = arrayImg[indexRandom]?.src?.large || ''
+        setFormData((prev) => ({ ...prev, image: url }))
       })
       .catch((error) => {
-        console.error("Errore durante il recupero dell'immagine:", error);
-      });
-  };
+        console.error("Errore durante il recupero dell'immagine:", error)
+      })
+  }
 
   const handleEditActivity = (index) => {
-    const activity = localPosts[index];
+    const activity = localPosts[index]
     if (activity) {
-      setCurrentActivity(index);
+      setCurrentActivity(index)
       setFormData({
         text: activity.text,
         image: activity.image,
-      });
-      setShowModal(true);
+      })
+      setShowModal(true)
     }
-  };
+  }
 
   const handleCreateActivity = () => {
-    setCurrentActivity(null);
-    setFormData({ text: "", image: "" });
-    setShowModal(true);
-  };
+    setCurrentActivity(null)
+    setFormData({ text: '', image: '' })
+    setShowModal(true)
+  }
 
   const handleDeleteActivity = (index) => {
-    const activityId = localPosts[index]._id;
-    dispatch(deletePost(activityId));
-    setLocalPosts(localPosts.filter((_, i) => i !== index));
-  };
+    const activityId = localPosts[index]._id
+    dispatch(deletePost(activityId))
+    setLocalPosts(localPosts.filter((_, i) => i !== index))
+  }
 
   const handleSaveActivity = () => {
     if (currentActivity !== null) {
-      const activityId = localPosts[currentActivity]._id;
-      dispatch(updatePost(activityId, formData));
+      const activityId = localPosts[currentActivity]._id
+      dispatch(updatePost(activityId, formData))
       setLocalPosts((prev) =>
         prev.map((activity, index) =>
           index === currentActivity ? { ...activity, ...formData } : activity
         )
-      );
+      )
     } else {
       dispatch(createPost(formData)).then((newPost) => {
-        setLocalPosts((prev) => [...prev, newPost]);
-      });
+        setLocalPosts((prev) => [...prev, newPost])
+      })
     }
-    setShowModal(false);
-  };
+    setShowModal(false)
+  }
 
   useEffect(() => {
-    dispatch(fetchPostsProfile("Francois"));
-  }, [dispatch]);
+    dispatch(fetchPostsProfile('Francois'))
+  }, [dispatch])
 
   return (
     <Container>
-      <Card className="d-flex mt-2" style={{ backgroundColor: "white" }}>
+      <Card className="d-flex mt-2" style={{ backgroundColor: 'white' }}>
         <Card.Header className="d-flex align-items-center">
           <span className="fw-bold">Attività</span>
           <div className="ms-auto">
             <Button
               id="transitionButton"
               className="mx-3 btn-outline-primary rounded-pill"
-              style={{ backgroundColor: "transparent", border: "1px solid" }}
+              style={{ backgroundColor: 'transparent', border: '1px solid' }}
               onClick={handleCreateActivity}
             >
               Crea un post
@@ -110,7 +111,7 @@ const ActivitiesComponent = () => {
           </div>
         </Card.Header>
         <Card.Body>
-          <Row xs={1} sm={2} md={2} lg={1} className="g-1">
+          <Row xs={1} className="g-1">
             {localPosts.map((activity, index) => (
               <Card key={index}>
                 <CardBody>
@@ -119,31 +120,28 @@ const ActivitiesComponent = () => {
                       <div className="d-flex">
                         <Card.Img
                           src={activity.image}
-                          style={{ width: "100px" }}
+                          style={{ width: '100px' }}
                           alt="Immagine attività"
                         />
-                        <Card.Text className="mx-3 fw-bold fs-4 mt-3">
+                        <Card.Text className="mx-3 fw-bold fs-5 mt-3">
                           {activity.text}
                         </Card.Text>
                       </div>
                     </div>
-                    <div className="d-flex justify-content-end align-items-start">
-                      <AiOutlineEdit
-                        className="me-4"
+                    <div className="d-flex justify-content-end align-items-center">
+                      <FaPen
+                        className="me-2 text-black"
                         style={{
-                          color: "#181818",
-                          width: "24px",
-                          height: "24px",
-                          cursor: "pointer",
+                          cursor: 'pointer',
                         }}
                         onClick={() => handleEditActivity(index)}
                       />
                       <MdDeleteForever
                         style={{
-                          color: "#181818",
-                          width: "24px",
-                          height: "24px",
-                          cursor: "pointer",
+                          color: '#181818',
+                          width: '24px',
+                          height: '24px',
+                          cursor: 'pointer',
                         }}
                         onClick={() => handleDeleteActivity(index)}
                       />
@@ -161,8 +159,8 @@ const ActivitiesComponent = () => {
         <Modal.Header closeButton>
           <Modal.Title>
             {currentActivity !== null
-              ? "Modifica attività"
-              : "Crea nuova attività"}
+              ? 'Modifica attività'
+              : 'Crea nuova attività'}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -211,7 +209,7 @@ const ActivitiesComponent = () => {
                     src={formData.image}
                     alt="Anteprima immagine"
                     fluid
-                    style={{ maxHeight: "200px" }}
+                    style={{ maxHeight: '200px' }}
                   />
                 </div>
               )}
@@ -228,7 +226,7 @@ const ActivitiesComponent = () => {
         </Modal.Footer>
       </Modal>
     </Container>
-  );
-};
+  )
+}
 
-export default ActivitiesComponent;
+export default ActivitiesComponent
