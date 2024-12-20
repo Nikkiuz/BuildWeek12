@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./reducers/userReducer";
-import searchReducer from "./features/searchSlice";
+import searchReducer from "./reducers/searchReducer";
 import postsReducer from "./reducers/postReducer";
 import experiencesReducer from "./reducers/experiencesReduces";
 import commentsReducer from "./reducers/commentsReducer";

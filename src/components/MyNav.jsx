@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router'
+import { useState } from "react";
+import { Link } from "react-router";
 import {
   Button,
   Container,
@@ -9,34 +9,34 @@ import {
   Navbar,
   NavDropdown,
   InputGroup,
-} from 'react-bootstrap'
-import { FaSearch, FaBriefcase, FaHome, FaUserFriends } from 'react-icons/fa'
+} from "react-bootstrap";
+import { FaSearch, FaBriefcase, FaHome, FaUserFriends } from "react-icons/fa";
 
-import logo from '../assets/logos/linkedin.png'
+import logo from "../assets/logos/linkedin.png";
 
-import { useDispatch, useSelector } from 'react-redux'
-import { setQuery } from '../redux/features/searchSlice'
+import { useDispatch, useSelector } from "react-redux";
+import { setQuery } from "../redux/reducers/searchReducer";
 
 const MyNav = ({ visible }) => {
-  const [InputSearch, setInputSearch] = useState(false)
+  const [InputSearch, setInputSearch] = useState(false);
 
   const handleSearchExpand = () => {
-    setInputSearch(true)
-  }
+    setInputSearch(true);
+  };
 
   const handleSearchCollapse = () => {
-    setInputSearch(false)
-  }
+    setInputSearch(false);
+  };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
-    dispatch(setQuery(e.target.value))
-  }
+    dispatch(setQuery(e.target.value));
+  };
 
-  const imageUser = useSelector((state) => state.userReducer.meProfile.image)
-  const name = useSelector((state) => state.userReducer.meProfile.name)
-  const surname = useSelector((state) => state.userReducer.meProfile.surname)
+  const imageUser = useSelector((state) => state.userReducer.meProfile.image);
+  const name = useSelector((state) => state.userReducer.meProfile.name);
+  const surname = useSelector((state) => state.userReducer.meProfile.surname);
 
   return (
     <Navbar className="bg-white d-flex justify-content-center align-items-center my-0 py-0">
@@ -108,21 +108,21 @@ const MyNav = ({ visible }) => {
         {/* NAVIGATION */}
         <Nav className="d-flex justify-content-center flex-grow-1 me-lg-5">
           <Link
-            to={'/'}
+            to={"/"}
             className="nav-link d-flex flex-column align-items-center me-4"
           >
             <FaHome size={30} className="mb-1" />
             <span className="fs-6 d-none d-lg-block">Home</span>
           </Link>
           <Link
-            to={'/rete'}
+            to={"/rete"}
             className="nav-link d-flex flex-column align-items-center me-4"
           >
             <FaUserFriends size={30} className="mb-1" />
             <span className="fs-6 d-none d-lg-block">Rete</span>
           </Link>
           <Link
-            to={'/lavoro'}
+            to={"/lavoro"}
             className="nav-link d-flex flex-column align-items-center me-4"
           >
             <FaBriefcase size={30} className="mb-1" />
@@ -132,7 +132,7 @@ const MyNav = ({ visible }) => {
 
         {/* PROFILE SECTION */}
         <Button className="d-flex flex-lg-column align-items-center bg-transparent text-dark border-0">
-          <Link to={'/profile'}>
+          <Link to={"/profile"}>
             <img
               src={imageUser}
               alt="avatar"
@@ -145,7 +145,7 @@ const MyNav = ({ visible }) => {
             <NavDropdown align="end" className="ms-1">
               <div className="d-flex flex-column">
                 <Link
-                  to={'/profile'}
+                  to={"/profile"}
                   className="nav-link me-2 d-flex align-items-center"
                 >
                   <img
@@ -156,7 +156,7 @@ const MyNav = ({ visible }) => {
                   />
                   {name} {surname}
                 </Link>
-                <Link to={'/profile'}>
+                <Link to={"/profile"}>
                   <Button
                     variant="outline-primary"
                     className="px-5 py-0 rounded-5 mx-2 mt-2"
@@ -167,27 +167,27 @@ const MyNav = ({ visible }) => {
 
                 <NavDropdown.Divider className="d-flex flex-column" />
                 <NavDropdown.Item className="fw-bold">Account</NavDropdown.Item>
-                <Link to={'/'} className="dropdown-item">
+                <Link to={"/"} className="dropdown-item">
                   Impostazioni e privacy
                 </Link>
-                <Link to={'/'} className="dropdown-item">
+                <Link to={"/"} className="dropdown-item">
                   Guida
                 </Link>
-                <Link to={'/'} className="dropdown-item">
+                <Link to={"/"} className="dropdown-item">
                   Lingua
                 </Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item className="fw-bold">
                   Gestisci
                 </NavDropdown.Item>
-                <Link to={'/'} className="dropdown-item">
+                <Link to={"/"} className="dropdown-item">
                   Post e attività
                 </Link>
-                <Link to={'/'} className="dropdown-item">
+                <Link to={"/"} className="dropdown-item">
                   Account per la pubblicazione
                 </Link>
                 <NavDropdown.Divider />
-                <Link to={'/'} className="dropdown-item">
+                <Link to={"/"} className="dropdown-item">
                   Esci
                 </Link>
               </div>
@@ -196,7 +196,7 @@ const MyNav = ({ visible }) => {
         </Button>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default MyNav
+export default MyNav;

@@ -26,9 +26,12 @@ export const fetchPosts =
 
     PostsAPI.allPosts(user)
       .then((posts) => {
+        const filteredData = posts
+          .slice(posts.length - 50, posts.length)
+          .filter((item) => item.image);
         dispatch({
           type: FETCH_POSTS_SUCCESS,
-          payload: posts,
+          payload: filteredData.reverse(),
         });
       })
       .catch((error) => {
