@@ -34,9 +34,9 @@ const MyNav = ({ visible }) => {
     dispatch(setQuery(e.target.value))
   }
 
-  const imageUser = useSelector((state) => state.userReducer.image)
-  const name = useSelector((state) => state.userReducer.name)
-  const surname = useSelector((state) => state.userReducer.surname)
+  const imageUser = useSelector((state) => state.userReducer.meProfile.image)
+  const name = useSelector((state) => state.userReducer.meProfile.name)
+  const surname = useSelector((state) => state.userReducer.meProfile.surname)
 
   return (
     <Navbar className="bg-white d-flex justify-content-center align-items-center my-0 py-0">

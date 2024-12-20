@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import CreatePost from "../components/CreatePost";
+import PostersHome from "../components/PostersHome";
+import LeftSidebarHome from "../components/LeftSidebarHome";
+import RightSidebarHome from "../components/RightSidebarHome";
+import FooterRight from "../components/FooterRight";
 import MyNav from "../components/MyNav";
+import PeopleSuggestions from "../components/PeopleSuggestions";
 
 const Rete = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -10,10 +16,27 @@ const Rete = () => {
       <header>
         <MyNav visible={isSearchVisible} />
       </header>
-      <Container>
-        <Row>
-          <Col>
-            <h1>Working</h1>
+      <Container className="px-0">
+        <Row className="m-0 p-0">
+          <Col md={4} lg={3} className="d-none d-md-block">
+            <LeftSidebarHome></LeftSidebarHome>
+          </Col>
+          <Col xs={12} md={8} lg={6}>
+            <div className="d-md-none d-flex justify-content-center mb-3">
+              <LeftSidebarHome></LeftSidebarHome>
+            </div>
+            <div className="mt-4">
+              <PeopleSuggestions></PeopleSuggestions>
+            </div>
+            <div className="d-lg-none">
+              <FooterRight />
+            </div>
+          </Col>
+          <Col lg={3} className="d-none d-lg-block">
+            <RightSidebarHome />
+            <div className="d-none d-lg-block">
+              <FooterRight />
+            </div>
           </Col>
         </Row>
       </Container>

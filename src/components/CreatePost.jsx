@@ -1,57 +1,87 @@
-import { useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Button,
-  Card,
+  Row,
   Form,
   Modal,
-  Row,
+  InputGroup,
+  FormControl,
+  Image,
+  Button,
+  Card,
   Col,
-  CardBody,
-  ModalTitle,
 } from "react-bootstrap";
-
-import avatar from "../assets/images/avatar.png";
-import MFoto from "../assets/images/ModaleFoto.jpeg";
-
-import { FiClock } from "react-icons/fi";
-import { TbPhoto } from "react-icons/tb";
-import { RiVideoFill } from "react-icons/ri";
-import { LuLetterText } from "react-icons/lu";
 import { Link } from "react-router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, updatePost } from "../redux/actions/activitiesAction";
+import imgCasuale from "../services/ImgPexels";
+import "../assets/css/Activities.css";
 
 const CreatePost = () => {
-  const [showModal, setShowModal] = useState({
-    post: false,
-    media: false,
-    article: false,
-  });
-  const [mediaType, setMediaType] = useState("");
-  const fileInput = useRef(null);
+  const dispatch = useDispatch();
 
-  const handleShowModal = (type, media = "") => {
-    setShowModal((prev) => ({ ...prev, [type]: true }));
-    if (media) setMediaType(media);
+  const [showModal, setShowModal] = useState(false);
+
+  const [currentActivity, setCurrentActivity] = useState(null);
+  const [formData, setFormData] = useState({ text: "", image: "" });
+  const [searchTerm, setSearchTerm] = useState("");
+  const posts = useSelector((state) => state.postsReducer.posts);
+  const [localPosts, setLocalPosts] = useState([]);
+  const imageUser = useSelector((state) => state.userReducer.meProfile.image);
+
+  useEffect(() => {
+    setLocalPosts(posts);
+  }, [posts]);
+
+  const fetchRandomImage = (query) => {
+    const indexRandom = Math.floor(Math.random() * 11);
+    imgCasuale(query)
+      .then((arrayImg) => {
+        const url = arrayImg[indexRandom]?.src?.large || "";
+        setFormData((prev) => ({ ...prev, image: url }));
+      })
+      .catch((error) => {
+        console.error("Errore durante il recupero dell'immagine:", error);
+      });
   };
 
-  const handleCloseModal = (type) => {
-    setShowModal((prev) => ({ ...prev, [type]: false }));
+  const handleCreateActivity = () => {
+    setCurrentActivity(null);
+    setFormData({ text: "", image: "" });
+    setShowModal(true);
   };
 
-  const triggerFileInput = () => {
-    fileInput.current.click();
+  const handleSaveActivity = async () => {
+    if (currentActivity !== null) {
+      const activityId = localPosts[currentActivity]._id;
+      try {
+        await dispatch(updatePost(activityId, formData));
+        setLocalPosts((prev) =>
+          prev.map((activity, index) =>
+            index === currentActivity ? { ...activity, ...formData } : activity
+          )
+        );
+        setShowModal(false);
+      } catch (error) {
+        console.error("Errore nell'aggiornamento del post:", error);
+      }
+    } else {
+      try {
+        const newPost = await dispatch(createPost(formData));
+        setLocalPosts((prev) => [...prev, newPost]);
+        setShowModal(false);
+      } catch (error) {
+        console.error("Errore nella creazione del post:", error);
+      }
+    }
   };
-
-  const imageUser = useSelector((state) => state.userReducer.image);
 
   return (
     <Card className="mt-4">
-      <CardBody>
-        {/* Form principale */}
-        <Form className="d-flex align-items-center mb-3">
+      <Card.Body>
+        <Form className="d-flex align-items-center mb-2 mt-2">
           <Row className="w-100">
             <Col xs="auto" className="d-flex align-items-center">
-              <Link to="/">
+              <Link to="/profile">
                 <img
                   src={imageUser}
                   alt="avatar"
@@ -65,141 +95,79 @@ const CreatePost = () => {
                 type="text"
                 placeholder="Crea un post"
                 className="rounded-5 py-2 px-3 w-100"
-                onClick={() => handleShowModal("post")}
+                onClick={handleCreateActivity}
               />
             </Col>
           </Row>
         </Form>
 
-        {/* Bottoni Foto e Video */}
-        <Row className="d-flex justify-content-center align-items-center">
-          <Col xs="auto">
-            <Button
-              variant="outline-light"
-              onClick={() => handleShowModal("media", "photo")}
-              className="border-0 text-dark me-4"
-            >
-              <TbPhoto size={25} className="text-primary me-2" /> Foto
-            </Button>
-
-            <Button
-              variant="outline-light"
-              onClick={() => handleShowModal("media", "video")}
-              className="border-0 text-dark me-4"
-            >
-              <RiVideoFill size={25} className="text-success me-2" /> Video
-            </Button>
-
-            <Button
-              variant="outline-light"
-              onClick={() => handleShowModal("article")}
-              className="border-0 text-dark"
-            >
-              <LuLetterText size={25} className="text-danger me-2" /> Scrivi un
-              articolo
-            </Button>
-          </Col>
-        </Row>
-
-        {/* Modale Crea Post */}
-        <Modal show={showModal.post} onHide={() => handleCloseModal("post")}>
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
-            <div className="d-flex align-items-center">
-              <img
-                src={avatar}
-                alt="avatar"
-                width="50px"
-                className="rounded-circle me-2"
-              />
-              <div>
-                <Modal.Title>Cristiano Ronaldo</Modal.Title>
-                <p className="mb-0">Pubblica: Chiunque</p>
-              </div>
-            </div>
+            <Modal.Title>
+              {currentActivity !== null ? "Modifica post" : "Crea nuovo post"}
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form.Group controlId="postText">
-              <Form.Control
-                as="textarea"
-                placeholder="Di cosa vorresti parlare?"
-                rows={10}
-                className="border-0"
-              />
-            </Form.Group>
+            <Form>
+              <Form.Group className="mb-3" controlId="formText">
+                <Form.Label>Testo</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Inserisci il testo"
+                  value={formData.text}
+                  onChange={(e) =>
+                    setFormData({ ...formData, text: e.target.value })
+                  }
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formCover">
+                <Form.Label>URL immagine</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Inserisci l'URL dell'immagine"
+                  value={formData.image}
+                  onChange={(e) =>
+                    setFormData({ ...formData, image: e.target.value })
+                  }
+                />
+                <InputGroup className="mt-3">
+                  <FormControl
+                    type="search"
+                    placeholder="Cerca immagine"
+                    aria-label="Search"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  <Button
+                    variant="outline-primary"
+                    onClick={() => fetchRandomImage(searchTerm)}
+                  >
+                    Cerca
+                  </Button>
+                </InputGroup>
+                {formData.image && (
+                  <div className="mt-3">
+                    <Image
+                      src={formData.image}
+                      alt="Anteprima immagine"
+                      fluid
+                      style={{ maxHeight: "200px" }}
+                    />
+                  </div>
+                )}
+              </Form.Group>
+            </Form>
           </Modal.Body>
           <Modal.Footer>
-            <FiClock size={25} />
-            <Button
-              variant="secondary"
-              className="rounded-5 py-1"
-              onClick={() => handleCloseModal("post")}
-            >
-              Pubblica
+            <Button variant="secondary" onClick={() => setShowModal(false)}>
+              Annulla
+            </Button>
+            <Button variant="primary" onClick={handleSaveActivity}>
+              Salva
             </Button>
           </Modal.Footer>
         </Modal>
-
-        {/* Modale Foto, Video*/}
-        <Modal show={showModal.media} onHide={() => handleCloseModal("media")}>
-          <Modal.Header closeButton>
-            <Modal.Title>Editor</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form.Group className=" d-flex flex-column align-items-center my-5">
-              <img src={MFoto} alt="avatar" width="120px" className="mb-2" />
-              <ModalTitle>Per inziare, seleziona i file</ModalTitle>
-              <Form.Label className="mt-2">
-                Condividi{" "}
-                {mediaType === "photo"
-                  ? "immagini nel tuo post"
-                  : "un video nel tuo post"}
-              </Form.Label>
-              <Form.Control
-                type="file"
-                ref={fileInput}
-                style={{ display: "none" }}
-              />
-              <Button
-                variant="primary"
-                onClick={triggerFileInput}
-                className=" rounded-5 py-1 mt-2"
-              >
-                Carica dal computer
-              </Button>
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" className="rounded-5 py-1">
-              Avanti
-            </Button>
-          </Modal.Footer>
-        </Modal>
-
-        {/* Modale Articolo */}
-        <Modal
-          show={showModal.article}
-          onHide={() => handleCloseModal("article")}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>Scrivi un articolo</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form.Group>
-              <Form.Control
-                as="textarea"
-                rows={10}
-                placeholder="Scrivi il tuo articolo qui..."
-                className=" border-0"
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" className="rounded-5 py-1">
-              Avanti
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </CardBody>
+      </Card.Body>
     </Card>
   );
 };
