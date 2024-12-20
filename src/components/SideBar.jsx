@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 import {
   Card,
   Button,
@@ -8,33 +8,34 @@ import {
   Col,
   Spinner,
   Alert,
-} from "react-bootstrap";
-import { FaPen } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProfiles } from "../redux/actions/userAction";
+} from 'react-bootstrap'
+import { FaPen } from 'react-icons/fa'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchAllProfiles } from '../redux/actions/userAction'
+import { AiOutlineEdit } from 'react-icons/ai'
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   // Recupero dei dati dallo store Redux
-  const meProfile = useSelector((state) => state.userReducer.meProfile);
-  const allProfile = useSelector((state) => state.userReducer.allProfile);
-  const loading = useSelector((state) => state.userReducer.loading);
-  const error = useSelector((state) => state.userReducer.error);
+  const meProfile = useSelector((state) => state.userReducer.meProfile)
+  const allProfile = useSelector((state) => state.userReducer.allProfile)
+  const loading = useSelector((state) => state.userReducer.loading)
+  const error = useSelector((state) => state.userReducer.error)
 
-  let lastActivity = useSelector((state) => state.postsReducer.posts);
-  lastActivity = lastActivity[lastActivity.length - 1];
+  let lastActivity = useSelector((state) => state.postsReducer.posts)
+  lastActivity = lastActivity[lastActivity.length - 1]
 
   useEffect(() => {
-    dispatch(fetchAllProfiles());
-  }, [dispatch]);
+    dispatch(fetchAllProfiles())
+  }, [dispatch])
 
   if (loading) {
     return (
       <div className="text-center mt-5">
         <Spinner animation="border" variant="primary" />
       </div>
-    );
+    )
   }
 
   if (error) {
@@ -42,11 +43,11 @@ const Sidebar = () => {
       <div className="text-center mt-5">
         <Alert variant="danger">Errore: {error}</Alert>
       </div>
-    );
+    )
   }
 
-  console.log("STAMPA TUTTO DENTRO COMPONENTE : ", allProfile[1]);
-  console.log("PROVAAA 123", lastActivity);
+  console.log('STAMPA TUTTO DENTRO COMPONENTE : ', allProfile[1])
+  console.log('PROVAAA 123', lastActivity)
 
   return (
     <Container className="mt-4">
@@ -61,7 +62,15 @@ const Sidebar = () => {
                   <p className="mb-0">Italiano</p>
                 </div>
                 <a href="#" className="text-decoration-none text-primary">
-                  <FaPen />
+                  <AiOutlineEdit
+                    className="ms-4"
+                    style={{
+                      color: '#181818',
+                      width: '24px',
+                      height: '24px',
+                      cursor: 'pointer',
+                    }}
+                  ></AiOutlineEdit>
                 </a>
               </Card.Body>
             </Card>
@@ -84,7 +93,14 @@ const Sidebar = () => {
                   </p>
                 </div>
                 <a href="#" className="text-decoration-none text-primary">
-                  <FaPen />
+                  <AiOutlineEdit
+                    style={{
+                      color: '#181818',
+                      width: '24px',
+                      height: '24px',
+                      cursor: 'pointer',
+                    }}
+                  ></AiOutlineEdit>
                 </a>
               </Card.Body>
             </Card>
@@ -107,7 +123,7 @@ const Sidebar = () => {
                   </div>
                 )}
                 <p className="mb-1 fw-bold">
-                  {lastActivity?.text || "Nessuna attività recente"}
+                  {lastActivity?.text || 'Nessuna attività recente'}
                 </p>
               </Card.Body>
             </Card>
@@ -126,7 +142,7 @@ const Sidebar = () => {
                       src={person.image}
                       alt={`Profilo di ${person.name}`}
                       className="me-3  rounded-circle"
-                      style={{ width: "48px", height: "48px" }}
+                      style={{ width: '48px', height: '48px' }}
                     />
                     <div>
                       <h6 className="mb-0">{person.name}</h6>
@@ -156,7 +172,7 @@ const Sidebar = () => {
                       src={person.image}
                       alt={`Profilo di ${person.name}`}
                       className="me-3 rounded-circle"
-                      style={{ width: "48px", height: "48px" }}
+                      style={{ width: '48px', height: '48px' }}
                     />
                     <div>
                       <h6 className="mb-0">{person.name}</h6>
@@ -173,13 +189,11 @@ const Sidebar = () => {
                 ))}
               </ListGroup>
             </Card>
-
-
           </div>
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar
