@@ -1,45 +1,71 @@
-import { Card, ListGroup } from 'react-bootstrap'
-import { BsInfoSquareFill } from 'react-icons/bs'
+import { useEffect, useState } from "react";
+import { Card, Row, Col, Button } from "react-bootstrap";
+import { BsInfoSquareFill, BsHandThumbsUp } from "react-icons/bs";
+import { FaRegCommentDots } from "react-icons/fa";
+import { RiRepeat2Line } from "react-icons/ri";
+import { IoPaperPlaneSharp } from "react-icons/io5";
 
 const RightSidebarHome = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZjNlMDBlYTI4NjAwMTUyOGI5NDIiLCJpYXQiOjE3MzQzNDE2MDAsImV4cCI6MTczNTU1MTIwMH0.jO7oLFp7acRJwfd0NGcjFxxoldMKhHOUTM3GUTovd5c`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const filteredData = data.slice(30, 60).filter((item) => item.image); // Filtra solo i post con immagini
+        setPosts(filteredData);
+      })
+      .catch((error) => {
+        console.error("Errore nel recuperare i post:", error);
+      });
+  }, []);
+
   return (
     <Card className="mt-4 mb-4">
       <Card.Body>
         <Card.Title className="fw-bold mb-0 d-flex align-items-center justify-content-between">
           In primo piano <BsInfoSquareFill size={15} />
         </Card.Title>
-        <Card.Text className=" text-muted">a cura di qualcuno</Card.Text>
-        <ListGroup>
-          <ListGroup.Item className="d-flex flex-column align-items-start fw-semibold border-0">
-            Big Ideas 2025
-            <span className="text-muted">11 giorni fa · pochi lettori</span>
-          </ListGroup.Item>
-          <ListGroup.Item className="d-flex flex-column align-items-start fw-semibold border-0">
-            Salvini normative
-            <span className="text-muted">2 giorni fa · tanti nemici</span>
-          </ListGroup.Item>
-          <ListGroup.Item className="d-flex flex-column align-items-start fw-semibold border-0">
-            Tech 2025
-            <span className="text-muted">5 giorni fa · 1104 lettori</span>
-          </ListGroup.Item>
-          <ListGroup.Item className="d-flex flex-column align-items-start fw-semibold border-0">
-            Revolut
-            <span className="text-muted"> 1 giorno fa · qualche lettore</span>
-          </ListGroup.Item>
-        </ListGroup>
-
-        <Card.Text className=" text-muted fw-semibold mb-1 mt-3">
-          I giochi di oggi
-        </Card.Text>
-
-        <ListGroup className="list-unstyled">
-          <ListGroup.Item className="d-flex flex-column align-items-start fw-semibold border-0">
-            Lavora non giocare
-          </ListGroup.Item>
-        </ListGroup>
+        {posts.map((post) => (
+          <Card key={post._id} className="my-2">
+            <Card.Header className="border-0 bg-white">
+              <div className="d-flex align-items-start">
+                <img
+                  src={post.user?.image || "https://via.placeholder.com/65"}
+                  width="45px"
+                  height="45px"
+                  className="rounded-circle me-3"
+                  alt="User"
+                  style={{ objectFit: "cover" }}
+                />
+                <div>
+                  <h5 className="mb-0 fs-5">Utente: {post.username.slice(0,10)}</h5>
+                  <p className="mb-0">
+                    Data: {new Date(post.createdAt).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
+            </Card.Header>
+            <Card.Body className="d-flex justify-content-center flex-column">
+              <Card.Text className="fs-5">{post.text}</Card.Text>
+              {post.image && (
+                <img
+                  src={post.image}
+                  alt="Post Image"
+                  className="img-fluid rounded"
+                />
+              )}
+            </Card.Body>
+          </Card>
+        ))}
       </Card.Body>
     </Card>
-  )
-}
+  );
+};
 
-export default RightSidebarHome
+export default RightSidebarHome;

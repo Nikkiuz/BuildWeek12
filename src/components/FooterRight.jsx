@@ -1,8 +1,8 @@
-import { Nav } from 'react-bootstrap'
-import Logo from '../assets/logos/linkedin.png'
-import '../assets/css/App.css'
+import { Nav } from "react-bootstrap";
+import Logo from "../assets/logos/linkedin.png";
+import "../assets/css/App.css";
 
-const FooterJob = () => {
+const FooterRight = () => {
   return (
     <>
       <Nav className="justify-content-center flex-wrap small">
@@ -33,13 +33,12 @@ const FooterJob = () => {
       </Nav>
       <div className="mt-2 d-flex justify-content-center">
         <p className=" d-flex align-items-center">
-          <span className=" text-primary">Linked</span>
           <img src={Logo} alt="logo" width="15px" className="me-1" />
           LinkedIn Corporation &copy;{new Date().getFullYear()}
         </p>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default FooterJob
+export default FooterRight;

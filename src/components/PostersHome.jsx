@@ -19,9 +19,14 @@ const PostersHome = () => {
       .then((data) => {
         console.log(
           "Risposta json dal server",
-          data.slice(data.length - 20, data.length)
+          data.slice(data.length - 50, data.length).filter((item) => item.image)
         );
-        setPosts(data.slice(data.length - 20, data.length));
+
+        const filteredData = data
+          .slice(data.length - 50, data.length)
+          .filter((item) => item.image);
+
+        setPosts(filteredData);
       })
       .catch((error) => {
         console.error("Errore nel recuperare i post:", error);
@@ -35,13 +40,15 @@ const PostersHome = () => {
           <Card.Header className="border-0 bg-white">
             <div className="d-flex align-items-start">
               <img
-                src={post.userAvatar}
-                width="70px"
+                src={post.user.image}
+                width="65px"
+                height="65px"
+                style={{ objectFit: "fill" }}
                 className="rounded-circle me-3"
               />
               <div>
-                <h5 className="mb-0 mt-1">{post.username}</h5>
-                <p className="mb-0">
+                <h5 className="mb-0 mt-1">Utente : {post.username}</h5>
+                <p className="mb-0"> Data :
                   {new Date(post.createdAt).toLocaleDateString()}
                 </p>
               </div>

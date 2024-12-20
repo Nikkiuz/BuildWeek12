@@ -21,16 +21,18 @@ import {
   fetchExperiences,
   createExperience,
   updateExperience,
+  deleteExperience,
 } from "../redux/actions/experiencesAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const ExperienceComponent = () => {
   const [showModal, setShowModal] = useState(false);
-  const [modalMode, setModalMode] = useState("create"); // "create" or "edit"
+  const [modalMode, setModalMode] = useState("create");
   const [selectedExperience, setSelectedExperience] = useState(null);
   const [formData, setFormData] = useState({
     role: "",
     company: "",
+    description: "",
     startDate: null,
     endDate: null,
     area: "",
@@ -53,6 +55,7 @@ const ExperienceComponent = () => {
     setFormData({
       role: exp.role,
       company: exp.company,
+      description: exp.description,
       startDate: new Date(exp.startDate),
       endDate: new Date(exp.endDate),
       area: exp.area,
@@ -62,10 +65,15 @@ const ExperienceComponent = () => {
     setShowModal(true);
   };
 
+  const handleDeleteExperience = (id) => {
+    dispatch(deleteExperience(id));
+  };
+
   const handleCreateActivity = () => {
     setSelectedExperience(null);
     setFormData({
       role: "",
+      description: "",
       company: "",
       startDate: null,
       endDate: null,
@@ -98,6 +106,7 @@ const ExperienceComponent = () => {
       endDate: formData.endDate ? formData.endDate.toISOString() : null,
       area: formData.area,
       image: formData.image,
+      description: formData.description,
     };
 
     if (modalMode === "create") {
@@ -127,16 +136,16 @@ const ExperienceComponent = () => {
                   <div className="align-content-center">
                     <Card.Img src={exp.image} style={{ width: "100px" }} />
                   </div>
-                  <div className="mx-3">
+                  <div className="mx-3 flex-grow-1">
                     <CardTitle className="fw-bold">{exp.role}</CardTitle>
                     <Card.Text
                       className="fw-medium mt-1"
                       style={{ marginBottom: "4px" }}
                     >
-                      Azienda : {exp.company}
+                      Azienda: {exp.company}
                     </Card.Text>
                     <Card.Text className="my-0" style={{ opacity: "0.7" }}>
-                      {exp.startDate}
+                      {new Date(exp.startDate).toLocaleDateString()}
                     </Card.Text>
                     <Card.Text className="my-0" style={{ opacity: "0.7" }}>
                       {exp.area}
@@ -161,9 +170,7 @@ const ExperienceComponent = () => {
                         height: "24px",
                         cursor: "pointer",
                       }}
-                      onClick={() =>
-                        console.log(`Deleting experience with index ${index}`)
-                      }
+                      onClick={() => handleDeleteExperience(exp._id)}
                     />
                   </div>
                 </CardBody>
@@ -191,6 +198,17 @@ const ExperienceComponent = () => {
                   setFormData({ ...formData, role: e.target.value })
                 }
                 placeholder="Inserisci il ruolo"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formDescription">
+              <Form.Label>Descrizione</Form.Label>
+              <Form.Control
+                type="text"
+                value={formData.description}
+                onChange={(e) =>
+                  setFormData({ ...formData, description: e.target.value })
+                }
+                placeholder="Inserisci la descrizione"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formCompany">

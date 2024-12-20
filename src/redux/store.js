@@ -3,6 +3,14 @@ import userReducer from "./reducers/userReducer";
 import searchReducer from "./features/searchSlice";
 import postsReducer from "./reducers/postReducer";
 import experiencesReducer from "./reducers/experiencesReduces";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["userReducer", "searchReducer"],
+};
 
 const allReducers = combineReducers({
   userReducer,
@@ -11,8 +19,12 @@ const allReducers = combineReducers({
   experiencesReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, allReducers);
+
 const store = configureStore({
-  reducer: allReducers,
+  reducer: persistedReducer,
 });
 
-export default store;
+const persistor = persistStore(store);
+
+export { store, persistor };

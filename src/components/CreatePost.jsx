@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef } from "react";
 import {
   Button,
   Card,
@@ -8,38 +8,41 @@ import {
   Col,
   CardBody,
   ModalTitle,
-} from 'react-bootstrap'
+} from "react-bootstrap";
 
-import avatar from '../assets/images/avatar.png'
-import MFoto from '../assets/images/ModaleFoto.jpeg'
+import avatar from "../assets/images/avatar.png";
+import MFoto from "../assets/images/ModaleFoto.jpeg";
 
-import { FiClock } from 'react-icons/fi'
-import { TbPhoto } from 'react-icons/tb'
-import { RiVideoFill } from 'react-icons/ri'
-import { LuLetterText } from 'react-icons/lu'
-import { Link } from 'react-router'
+import { FiClock } from "react-icons/fi";
+import { TbPhoto } from "react-icons/tb";
+import { RiVideoFill } from "react-icons/ri";
+import { LuLetterText } from "react-icons/lu";
+import { Link } from "react-router";
+import { useSelector } from "react-redux";
 
 const CreatePost = () => {
   const [showModal, setShowModal] = useState({
     post: false,
     media: false,
     article: false,
-  })
-  const [mediaType, setMediaType] = useState('')
-  const fileInput = useRef(null)
+  });
+  const [mediaType, setMediaType] = useState("");
+  const fileInput = useRef(null);
 
-  const handleShowModal = (type, media = '') => {
-    setShowModal((prev) => ({ ...prev, [type]: true }))
-    if (media) setMediaType(media)
-  }
+  const handleShowModal = (type, media = "") => {
+    setShowModal((prev) => ({ ...prev, [type]: true }));
+    if (media) setMediaType(media);
+  };
 
   const handleCloseModal = (type) => {
-    setShowModal((prev) => ({ ...prev, [type]: false }))
-  }
+    setShowModal((prev) => ({ ...prev, [type]: false }));
+  };
 
   const triggerFileInput = () => {
-    fileInput.current.click()
-  }
+    fileInput.current.click();
+  };
+
+  const imageUser = useSelector((state) => state.userReducer.image);
 
   return (
     <Card className="mt-4">
@@ -50,7 +53,7 @@ const CreatePost = () => {
             <Col xs="auto" className="d-flex align-items-center">
               <Link to="/">
                 <img
-                  src={avatar}
+                  src={imageUser}
                   alt="avatar"
                   width="50px"
                   className="rounded-circle bg-black"
@@ -62,7 +65,7 @@ const CreatePost = () => {
                 type="text"
                 placeholder="Crea un post"
                 className="rounded-5 py-2 px-3 w-100"
-                onClick={() => handleShowModal('post')}
+                onClick={() => handleShowModal("post")}
               />
             </Col>
           </Row>
@@ -73,7 +76,7 @@ const CreatePost = () => {
           <Col xs="auto">
             <Button
               variant="outline-light"
-              onClick={() => handleShowModal('media', 'photo')}
+              onClick={() => handleShowModal("media", "photo")}
               className="border-0 text-dark me-4"
             >
               <TbPhoto size={25} className="text-primary me-2" /> Foto
@@ -81,7 +84,7 @@ const CreatePost = () => {
 
             <Button
               variant="outline-light"
-              onClick={() => handleShowModal('media', 'video')}
+              onClick={() => handleShowModal("media", "video")}
               className="border-0 text-dark me-4"
             >
               <RiVideoFill size={25} className="text-success me-2" /> Video
@@ -89,7 +92,7 @@ const CreatePost = () => {
 
             <Button
               variant="outline-light"
-              onClick={() => handleShowModal('article')}
+              onClick={() => handleShowModal("article")}
               className="border-0 text-dark"
             >
               <LuLetterText size={25} className="text-danger me-2" /> Scrivi un
@@ -99,7 +102,7 @@ const CreatePost = () => {
         </Row>
 
         {/* Modale Crea Post */}
-        <Modal show={showModal.post} onHide={() => handleCloseModal('post')}>
+        <Modal show={showModal.post} onHide={() => handleCloseModal("post")}>
           <Modal.Header closeButton>
             <div className="d-flex align-items-center">
               <img
@@ -129,7 +132,7 @@ const CreatePost = () => {
             <Button
               variant="secondary"
               className="rounded-5 py-1"
-              onClick={() => handleCloseModal('post')}
+              onClick={() => handleCloseModal("post")}
             >
               Pubblica
             </Button>
@@ -137,7 +140,7 @@ const CreatePost = () => {
         </Modal>
 
         {/* Modale Foto, Video*/}
-        <Modal show={showModal.media} onHide={() => handleCloseModal('media')}>
+        <Modal show={showModal.media} onHide={() => handleCloseModal("media")}>
           <Modal.Header closeButton>
             <Modal.Title>Editor</Modal.Title>
           </Modal.Header>
@@ -146,15 +149,15 @@ const CreatePost = () => {
               <img src={MFoto} alt="avatar" width="120px" className="mb-2" />
               <ModalTitle>Per inziare, seleziona i file</ModalTitle>
               <Form.Label className="mt-2">
-                Condividi{' '}
-                {mediaType === 'photo'
-                  ? 'immagini nel tuo post'
-                  : 'un video nel tuo post'}
+                Condividi{" "}
+                {mediaType === "photo"
+                  ? "immagini nel tuo post"
+                  : "un video nel tuo post"}
               </Form.Label>
               <Form.Control
                 type="file"
                 ref={fileInput}
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
               />
               <Button
                 variant="primary"
@@ -175,7 +178,7 @@ const CreatePost = () => {
         {/* Modale Articolo */}
         <Modal
           show={showModal.article}
-          onHide={() => handleCloseModal('article')}
+          onHide={() => handleCloseModal("article")}
         >
           <Modal.Header closeButton>
             <Modal.Title>Scrivi un articolo</Modal.Title>
@@ -198,7 +201,7 @@ const CreatePost = () => {
         </Modal>
       </CardBody>
     </Card>
-  )
-}
+  );
+};
 
-export default CreatePost
+export default CreatePost;
