@@ -12,7 +12,6 @@ import {
 import { FaPen } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllProfiles } from '../redux/actions/userAction'
-import { AiOutlineEdit } from 'react-icons/ai'
 
 const Sidebar = () => {
   const dispatch = useDispatch()
@@ -62,15 +61,12 @@ const Sidebar = () => {
                   <p className="mb-0">Italiano</p>
                 </div>
                 <a href="#" className="text-decoration-none text-primary">
-                  <AiOutlineEdit
-                    className="ms-4"
+                  <FaPen
+                    className="text-black ms-4"
                     style={{
-                      color: '#181818',
-                      width: '24px',
-                      height: '24px',
                       cursor: 'pointer',
                     }}
-                  ></AiOutlineEdit>
+                  />
                 </a>
               </Card.Body>
             </Card>
@@ -122,27 +118,24 @@ const Sidebar = () => {
               <Card.Header>Altre visualizzazioni</Card.Header>
               <ListGroup variant="flush">
                 {allProfile.slice(0, 3).map((person) => (
-                  <ListGroup.Item
-                    key={person._id}
-                    className="d-flex align-items-center"
-                  >
+                  <ListGroup.Item key={person._id} className="d-flex ">
                     <img
                       src={person.image}
                       alt={`Profilo di ${person.name}`}
                       className="me-3  rounded-circle"
                       style={{ width: '48px', height: '48px' }}
                     />
-                    <div>
+                    <div className="d-lg-flex align-items-lg-center justify-content-lg-end d-md-flex flex-md-column">
                       <h6 className="mb-0">{person.name}</h6>
                       <small>{person.title}</small>
+                      <Button
+                        variant="outline-primary"
+                        size="sm"
+                        className="ms-auto mt-3"
+                      >
+                        Collegati
+                      </Button>
                     </div>
-                    <Button
-                      variant="outline-primary"
-                      size="sm"
-                      className="ms-auto"
-                    >
-                      Collegati
-                    </Button>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
