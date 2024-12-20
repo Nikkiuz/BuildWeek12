@@ -1,7 +1,7 @@
-import { Row, Col, Nav, Dropdown, Container } from "react-bootstrap";
-import { FaShieldAlt } from "react-icons/fa";
-import { FaCircleQuestion } from "react-icons/fa6";
-import { IoMdSettings } from "react-icons/io";
+import { Row, Col, Nav, Dropdown, Container } from 'react-bootstrap'
+import { FaShieldAlt } from 'react-icons/fa'
+import { FaCircleQuestion } from 'react-icons/fa6'
+import { IoMdSettings } from 'react-icons/io'
 
 const FooterProfile = () => {
   return (
@@ -120,7 +120,7 @@ const FooterProfile = () => {
         </Row>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default FooterProfile;
+export default FooterProfile
