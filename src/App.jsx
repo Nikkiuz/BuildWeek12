@@ -11,9 +11,7 @@ import Rete from './pages/Rete.jsx'
 function App() {
   return (
     <BrowserRouter>
-      <header>
-        <MyNav />
-      </header>
+     
       <main className="bg">
         <Routes>
           <Route path="/" element={<Home />} />

@@ -1,20 +1,26 @@
-import { Card, Image } from 'react-bootstrap'
-import '../assets/css/App.css'
-import avatar from '../assets/images/avatar.png'
-import { FaBookmark } from 'react-icons/fa'
-import { PiPlus } from 'react-icons/pi'
-import { Link } from 'react-router-dom'
+import { Card, Image } from "react-bootstrap";
+import "../assets/css/App.css";
+import avatar from "../assets/images/avatar.png";
+import { FaBookmark } from "react-icons/fa";
+import { PiPlus } from "react-icons/pi";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const LeftSidebarHome = () => {
+  const imageUser = useSelector((state) => state.userReducer.image);
+  const name = useSelector((state) => state.userReducer.name);
+  const surname = useSelector((state) => state.userReducer.surname);
+  const tittleUser = useSelector((state) => state.userReducer.title);
+
   return (
     <div className="d-flex flex-column w-100">
       <Card className=" rounded-3 mt-4">
         <Card.Header className="d-flex flex-column align-items-center bg-white p-0 pb-3">
           <div className="w-100 d-flex justify-content-center position-relative">
             <div className="back rounded-top-3"></div>
-            <Link to={'/profile'} className="z-1">
+            <Link to={"/profile"} className="z-1">
               <Image
-                src={avatar}
+                src={imageUser}
                 alt="Profile"
                 roundedCircle
                 width="75px"
@@ -22,10 +28,12 @@ const LeftSidebarHome = () => {
               />
             </Link>
           </div>
-          <Link to={'/profile'} className=" text-decoration-none text-black">
-            <Card.Title className="mb-1 nav-link-custom2">Me cucino</Card.Title>
+          <Link to={"/profile"} className=" text-decoration-none text-black">
+            <Card.Title className="mb-1 nav-link-custom2">
+              {name} + + {surname}
+            </Card.Title>
           </Link>
-          <Card.Text className=" small">Web Developer</Card.Text>
+          <Card.Text className=" small">{tittleUser}</Card.Text>
         </Card.Header>
         <Card.Body>
           <Card.Text className=" small mb-1">
@@ -56,7 +64,7 @@ const LeftSidebarHome = () => {
         </Card.Footer>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default LeftSidebarHome
+export default LeftSidebarHome;

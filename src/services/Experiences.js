@@ -36,7 +36,13 @@ const API_CALL = (endpoint, method = "GET", user, body = null) => {
         );
       });
     }
-    return response.json();
+    return response.text().then((text) => {
+      try {
+        return text ? JSON.parse(text) : {};
+      } catch {
+        return text;
+      }
+    });
   });
 };
 

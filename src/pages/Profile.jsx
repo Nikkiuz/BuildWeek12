@@ -5,10 +5,17 @@ import HeroSection from '../components/HeroSection'
 import Sidebar from '../components/SideBar'
 import FooterProfile from '../components/FooterProfile'
 import MyBio from '../components/MyBio'
+import { useState } from 'react'
+import MyNav from '../components/MyNav'
 
 const Profile = () => {
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
+
   return (
     <>
+      <header>
+        <MyNav visible={isSearchVisible} />
+      </header>
       <Container>
         <Row className="justify-content-end">
           <Col xs={12} lg={9}>

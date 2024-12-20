@@ -37,7 +37,7 @@ const CardJob = () => {
       {loading && <p>Loading jobs...</p>}
       {error && <p>Error: {error}</p>}
       <div className="job-list">
-        {jobs.slice(-20).map((job) => (
+        {jobs.slice(-10).map((job) => (
           <Card key={job._id} className="me-lg-4">
             <Card.Body>
               <Card.Title className=" text-primary">{job.title}</Card.Title>
