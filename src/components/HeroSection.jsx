@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 import {
   Button,
   Card,
@@ -10,70 +10,69 @@ import {
   Form,
   InputGroup,
   FormControl,
-} from "react-bootstrap";
-import InfoSection from "./InfoSection";
-import { AiFillCamera } from "react-icons/ai";
-import "../assets/css/HeroSection.css";
-import imgCasuale from "../services/ImgPexels";
+} from 'react-bootstrap'
+import InfoSection from './InfoSection'
+import { AiFillCamera } from 'react-icons/ai'
+import '../assets/css/HeroSection.css'
+import imgCasuale from '../services/ImgPexels'
 import {
-  fetchMeProfile,
   updateCopertinaProfile,
   updateProfile,
-} from "../redux/actions/userAction";
-import { useSelector, useDispatch } from "react-redux";
+} from '../redux/actions/userAction'
+import { useSelector, useDispatch } from 'react-redux'
 
 const HeroSection = () => {
-  const [urlImg, setUrlImg] = useState("");
-  const [customImgUrl, setCustomImgUrl] = useState(""); 
-  const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(null); 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [urlImg, setUrlImg] = useState('')
+  const [customImgUrl, setCustomImgUrl] = useState('')
+  const [showModal, setShowModal] = useState(false)
+  const [modalType, setModalType] = useState(null)
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const imgProfile = useSelector((state) => state.userReducer.meProfile.image);
+  const imgProfile = useSelector((state) => state.userReducer.meProfile.image)
   const copertinaProfileUrl = useSelector(
     (state) => state.userReducer.copertinaProfileUrl
-  );
+  )
 
   const handleShowModal = (type) => {
-    setModalType(type);
-    setShowModal(true);
-  };
+    setModalType(type)
+    setShowModal(true)
+  }
   const handleCloseModal = () => {
-    setShowModal(false);
-    setUrlImg("");
-    setCustomImgUrl(""); 
-    setSearchTerm("");
-  };
+    setShowModal(false)
+    setUrlImg('')
+    setCustomImgUrl('')
+    setSearchTerm('')
+  }
 
   const fetchRandomImage = (query) => {
-    const indexRandom = Math.floor(Math.random() * 11);
+    const indexRandom = Math.floor(Math.random() * 11)
     imgCasuale(query)
       .then((arrayImg) => {
-        const url = arrayImg[indexRandom]?.src?.large || "";
-        setUrlImg(url);
+        const url = arrayImg[indexRandom]?.src?.large || ''
+        setUrlImg(url)
       })
       .catch((error) => {
-        console.error("Errore durante il recupero dell'immagine:", error);
-      });
-  };
+        console.error("Errore durante il recupero dell'immagine:", error)
+      })
+  }
 
   const handleSaveImage = () => {
-    const finalUrl = customImgUrl || urlImg; // Usa l'URL personalizzato se presente
+    const finalUrl = customImgUrl || urlImg // Usa l'URL personalizzato se presente
     if (finalUrl) {
-      if (modalType === "background") {
-        dispatch(updateCopertinaProfile(finalUrl));
-      } else if (modalType === "profile") {
-        dispatch(updateProfile({ image: finalUrl }));
+      if (modalType === 'background') {
+        dispatch(updateCopertinaProfile(finalUrl))
+      } else if (modalType === 'profile') {
+        dispatch(updateProfile({ image: finalUrl }))
       }
-      handleCloseModal();
+      handleCloseModal()
     }
-  };
+  }
 
   useEffect(() => {
-    console.log("Stato aggiornato copertinaProfileUrl:", copertinaProfileUrl);
-  }, [copertinaProfileUrl]);
+    console.log('Stato aggiornato copertinaProfileUrl:', copertinaProfileUrl)
+  }, [copertinaProfileUrl])
 
   return (
     <Container className="rounded mt-3">
@@ -83,42 +82,42 @@ const HeroSection = () => {
             <Card.Img
               variant="top"
               src={copertinaProfileUrl}
-              style={{ height: "200px", width: "100%", objectFit: "cover" }}
+              style={{ height: '200px', width: '100%', objectFit: 'cover' }}
             />
             <InfoSection />
             <Col className="profileDiv">
               <Image
                 src={imgProfile}
                 className="rounded-circle profilePic"
-                style={{ border: "5px solid white", objectFit: "cover" }}
+                style={{ border: '5px solid white', objectFit: 'cover' }}
               />
             </Col>
             <Col>
               <Button
-                onClick={() => handleShowModal("profile")}
+                onClick={() => handleShowModal('profile')}
                 className="cameraProfile rounded-circle"
               >
                 <AiFillCamera
                   style={{
-                    color: "#2A6097",
-                    width: "18px",
-                    height: "18px",
-                    margin: "5px",
+                    color: '#2A6097',
+                    width: '18px',
+                    height: '18px',
+                    margin: '5px',
                   }}
                 />
               </Button>
             </Col>
             <Col>
               <Button
-                onClick={() => handleShowModal("background")}
+                onClick={() => handleShowModal('background')}
                 className="cameraIcon rounded-circle"
               >
                 <AiFillCamera
                   style={{
-                    color: "#2A6097",
-                    width: "18px",
-                    height: "18px",
-                    margin: "5px",
+                    color: '#2A6097',
+                    width: '18px',
+                    height: '18px',
+                    margin: '5px',
                   }}
                 />
               </Button>
@@ -130,14 +129,19 @@ const HeroSection = () => {
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            {modalType === "background"
-              ? "Modifica Copertina"
-              : "Modifica Immagine Profilo"}
+            {modalType === 'background'
+              ? 'Modifica Copertina'
+              : 'Modifica Immagine Profilo'}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {customImgUrl ? (
-            <Image src={customImgUrl} alt="Immagine URL personalizzato" fluid className="mb-3" />
+            <Image
+              src={customImgUrl}
+              alt="Immagine URL personalizzato"
+              fluid
+              className="mb-3"
+            />
           ) : urlImg ? (
             <Image src={urlImg} alt="Immagine casuale" fluid className="mb-3" />
           ) : (
@@ -179,7 +183,7 @@ const HeroSection = () => {
         </Modal.Footer>
       </Modal>
     </Container>
-  );
-};
+  )
+}
 
-export default HeroSection;
+export default HeroSection
