@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
+import '../assets/css/App.css'
 import {
   Row,
   Form,
@@ -9,84 +10,87 @@ import {
   Button,
   Card,
   Col,
-} from "react-bootstrap";
-import { Link } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import { createPost, updatePost } from "../redux/actions/activitiesAction";
-import imgCasuale from "../services/ImgPexels";
-import "../assets/css/Activities.css";
+} from 'react-bootstrap'
+import { Link } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { createPost, updatePost } from '../redux/actions/activitiesAction'
+import imgCasuale from '../services/ImgPexels'
+import '../assets/css/Activities.css'
+import { FaImage, FaPen } from 'react-icons/fa'
 
 const CreatePost = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false)
 
-  const [currentActivity, setCurrentActivity] = useState(null);
-  const [formData, setFormData] = useState({ text: "", image: "" });
-  const [searchTerm, setSearchTerm] = useState("");
-  const posts = useSelector((state) => state.postsReducer.posts);
-  const [localPosts, setLocalPosts] = useState([]);
-  const imageUser = useSelector((state) => state.userReducer.meProfile.image);
+  const [currentActivity, setCurrentActivity] = useState(null)
+  const [formData, setFormData] = useState({ text: '', image: '' })
+  const [searchTerm, setSearchTerm] = useState('')
+  const posts = useSelector((state) => state.postsReducer.posts)
+  const [localPosts, setLocalPosts] = useState([])
+  const imageUser = useSelector((state) => state.userReducer.meProfile.image)
+  const name = useSelector((state) => state.userReducer.meProfile.name)
+  const surname = useSelector((state) => state.userReducer.meProfile.surname)
 
   useEffect(() => {
-    setLocalPosts(posts);
-  }, [posts]);
+    setLocalPosts(posts)
+  }, [posts])
 
   const fetchRandomImage = (query) => {
-    const indexRandom = Math.floor(Math.random() * 11);
+    const indexRandom = Math.floor(Math.random() * 11)
     imgCasuale(query)
       .then((arrayImg) => {
-        const url = arrayImg[indexRandom]?.src?.large || "";
-        setFormData((prev) => ({ ...prev, image: url }));
+        const url = arrayImg[indexRandom]?.src?.large || ''
+        setFormData((prev) => ({ ...prev, image: url }))
       })
       .catch((error) => {
-        console.error("Errore durante il recupero dell'immagine:", error);
-      });
-  };
+        console.error("Errore durante il recupero dell'immagine:", error)
+      })
+  }
 
   const handleCreateActivity = () => {
-    setCurrentActivity(null);
-    setFormData({ text: "", image: "" });
-    setShowModal(true);
-  };
+    setCurrentActivity(null)
+    setFormData({ text: '', image: '' })
+    setShowModal(true)
+  }
 
   const handleSaveActivity = async () => {
     if (currentActivity !== null) {
-      const activityId = localPosts[currentActivity]._id;
+      const activityId = localPosts[currentActivity]._id
       try {
-        await dispatch(updatePost(activityId, formData));
+        await dispatch(updatePost(activityId, formData))
         setLocalPosts((prev) =>
           prev.map((activity, index) =>
             index === currentActivity ? { ...activity, ...formData } : activity
           )
-        );
-        setShowModal(false);
+        )
+        setShowModal(false)
       } catch (error) {
-        console.error("Errore nell'aggiornamento del post:", error);
+        console.error("Errore nell'aggiornamento del post:", error)
       }
     } else {
       try {
-        const newPost = await dispatch(createPost(formData));
-        setLocalPosts((prev) => [...prev, newPost]);
-        setShowModal(false);
+        const newPost = await dispatch(createPost(formData))
+        setLocalPosts((prev) => [...prev, newPost])
+        setShowModal(false)
       } catch (error) {
-        console.error("Errore nella creazione del post:", error);
+        console.error('Errore nella creazione del post:', error)
       }
     }
-  };
+  }
 
   return (
-    <Card className="mt-4">
+    <Card className="p-2 mt-4">
       <Card.Body>
-        <Form className="d-flex align-items-center mb-2 mt-2">
-          <Row className="w-100">
-            <Col xs="auto" className="d-flex align-items-center">
+        <Form>
+          <Row className="w-100 d-flex align-items-center ">
+            <Col xs="auto">
               <Link to="/profile">
                 <img
                   src={imageUser}
                   alt="avatar"
-                  width="50px"
-                  className="rounded-circle bg-black"
+                  width="60px"
+                  className="rounded-circle"
                 />
               </Link>
             </Col>
@@ -94,7 +98,7 @@ const CreatePost = () => {
               <Form.Control
                 type="text"
                 placeholder="Crea un post"
-                className="rounded-5 py-2 px-3 w-100"
+                className="rounded-5 py-2 px-3 w-100 bg border border-1 border-black"
                 onClick={handleCreateActivity}
               />
             </Col>
@@ -103,14 +107,23 @@ const CreatePost = () => {
 
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              {currentActivity !== null ? "Modifica post" : "Crea nuovo post"}
+            <Modal.Title className=" fs-4">
+              <img
+                src={imageUser}
+                alt="avatar"
+                width="60px"
+                className="rounded-circle me-2 border border-1 border-black"
+              />
+              {name} {surname}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className=" border-0">
             <Form>
               <Form.Group className="mb-3" controlId="formText">
-                <Form.Label>Testo</Form.Label>
+                <Form.Label className=" d-flex align-items-center">
+                  <FaPen className="me-1 text-muted" />
+                  Testo
+                </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Inserisci il testo"
@@ -121,7 +134,10 @@ const CreatePost = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formCover">
-                <Form.Label>URL immagine</Form.Label>
+                <Form.Label className=" d-flex align-items-center">
+                  <FaImage size={20} className="me-1 text-muted" />
+                  URL immagine
+                </Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Inserisci l'URL dell'immagine"
@@ -139,7 +155,7 @@ const CreatePost = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                   <Button
-                    variant="outline-primary"
+                    variant="outline-secondary"
                     onClick={() => fetchRandomImage(searchTerm)}
                   >
                     Cerca
@@ -151,25 +167,25 @@ const CreatePost = () => {
                       src={formData.image}
                       alt="Anteprima immagine"
                       fluid
-                      style={{ maxHeight: "200px" }}
+                      style={{ maxHeight: '200px' }}
                     />
                   </div>
                 )}
               </Form.Group>
             </Form>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className=" border-0 pt-1 pb-3">
             <Button variant="secondary" onClick={() => setShowModal(false)}>
               Annulla
             </Button>
             <Button variant="primary" onClick={handleSaveActivity}>
-              Salva
+              Pubblica
             </Button>
           </Modal.Footer>
         </Modal>
       </Card.Body>
     </Card>
-  );
-};
+  )
+}
 
-export default CreatePost;
+export default CreatePost
