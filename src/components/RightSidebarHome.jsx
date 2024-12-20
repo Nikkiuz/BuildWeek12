@@ -48,7 +48,17 @@ const RightSidebarHome = () => {
                     {post.user.name + ' ' + post.user.surname}
                   </h5>
                   <p className="mb-0">
-                    Data: {new Date(post.createdAt).toLocaleDateString()}
+                    Pubblicato il{' '}
+                    {new Date(post.createdAt).toLocaleDateString('it-IT', {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                    })}{' '}
+                    alle{' '}
+                    {new Date(post.createdAt).toLocaleTimeString('it-IT', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
                   </p>
                 </div>
               </div>
