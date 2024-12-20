@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
-import { Card, Row, Col, Button } from "react-bootstrap";
-import { BsInfoSquareFill, BsHandThumbsUp } from "react-icons/bs";
-import { FaRegCommentDots } from "react-icons/fa";
-import { RiRepeat2Line } from "react-icons/ri";
-import { IoPaperPlaneSharp } from "react-icons/io5";
+import { useEffect, useState } from 'react'
+import { Card, Row, Col, Button } from 'react-bootstrap'
+import { BsInfoSquareFill, BsHandThumbsUp } from 'react-icons/bs'
+import { FaRegCommentDots } from 'react-icons/fa'
+import { RiRepeat2Line } from 'react-icons/ri'
+import { IoPaperPlaneSharp } from 'react-icons/io5'
 
 const RightSidebarHome = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    fetch("https://striveschool-api.herokuapp.com/api/posts/", {
-      method: "GET",
+    fetch('https://striveschool-api.herokuapp.com/api/posts/', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZjNlMDBlYTI4NjAwMTUyOGI5NDIiLCJpYXQiOjE3MzQzNDE2MDAsImV4cCI6MTczNTU1MTIwMH0.jO7oLFp7acRJwfd0NGcjFxxoldMKhHOUTM3GUTovd5c`,
       },
     })
       .then((response) => response.json())
       .then((data) => {
-        const filteredData = data.slice(30, 60).filter((item) => item.image); // Filtra solo i post con immagini
-        setPosts(filteredData);
+        const filteredData = data.slice(30, 60).filter((item) => item.image) // Filtra solo i post con immagini
+        setPosts(filteredData)
       })
       .catch((error) => {
-        console.error("Errore nel recuperare i post:", error);
-      });
-  }, []);
+        console.error('Errore nel recuperare i post:', error)
+      })
+  }, [])
 
   return (
     <Card className="mt-4 mb-4">
@@ -36,17 +36,29 @@ const RightSidebarHome = () => {
             <Card.Header className="border-0 bg-white">
               <div className="d-flex align-items-start">
                 <img
-                  src={post.user?.image || "https://via.placeholder.com/65"}
+                  src={post.user?.image || 'https://via.placeholder.com/65'}
                   width="45px"
                   height="45px"
                   className="rounded-circle me-3"
                   alt="User"
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: 'cover' }}
                 />
                 <div>
-                  <h5 className="mb-0 fs-5">Utente: {post.username.slice(0,10)}</h5>
+                  <h5 className="mb-0 fs-5 overflow-hidden">
+                    {post.user.name + ' ' + post.user.surname}
+                  </h5>
                   <p className="mb-0">
-                    Data: {new Date(post.createdAt).toLocaleDateString()}
+                    Pubblicato il{' '}
+                    {new Date(post.createdAt).toLocaleDateString('it-IT', {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                    })}{' '}
+                    alle{' '}
+                    {new Date(post.createdAt).toLocaleTimeString('it-IT', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
                   </p>
                 </div>
               </div>
@@ -65,7 +77,7 @@ const RightSidebarHome = () => {
         ))}
       </Card.Body>
     </Card>
-  );
-};
+  )
+}
 
-export default RightSidebarHome;
+export default RightSidebarHome

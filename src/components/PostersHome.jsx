@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
-import { Row, Col, Card, Button, Modal, Form } from "react-bootstrap";
-import { BsHandThumbsUp } from "react-icons/bs";
-import { FaRegCommentDots } from "react-icons/fa";
-import { IoPaperPlaneSharp } from "react-icons/io5";
-import { RiRepeat2Line } from "react-icons/ri";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchComments } from "../redux/actions/commentsAction";
+import { useState, useEffect } from 'react'
+import { Row, Col, Card, Button, Modal, Form } from 'react-bootstrap'
+import { BsHandThumbsUp } from 'react-icons/bs'
+import { FaRegCommentDots } from 'react-icons/fa'
+import { IoPaperPlaneSharp } from 'react-icons/io5'
+import { RiRepeat2Line } from 'react-icons/ri'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchComments } from '../redux/actions/commentsAction'
 
 const PostersHome = () => {
-  const [posts, setPosts] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [selectedPostId, setSelectedPostId] = useState(null);
-  const [newComment, setNewComment] = useState("");
-  const comments = useSelector((state) => state.commentsReducer.comments);
+  const [posts, setPosts] = useState([])
+  const [showModal, setShowModal] = useState(false)
+  const [selectedPostId, setSelectedPostId] = useState(null)
+  const [newComment, setNewComment] = useState('')
+  const comments = useSelector((state) => state.commentsReducer.comments)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch("https://striveschool-api.herokuapp.com/api/posts/", {
-      method: "GET",
+    fetch('https://striveschool-api.herokuapp.com/api/posts/', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzVmZjNlMDBlYTI4NjAwMTUyOGI5NDIiLCJpYXQiOjE3MzQzNDE2MDAsImV4cCI6MTczNTU1MTIwMH0.jO7oLFp7acRJwfd0NGcjFxxoldMKhHOUTM3GUTovd5c`,
       },
@@ -27,34 +27,47 @@ const PostersHome = () => {
       .then((data) => {
         const filteredData = data
           .slice(data.length - 50, data.length)
-          .filter((item) => item.image);
+          .filter((item) => item.image)
 
-        setPosts(filteredData.reverse());
+        setPosts(filteredData.reverse())
       })
       .catch((error) => {
-        console.error("Errore nel recuperare i post:", error);
-      });
-  }, []);
+        console.error('Errore nel recuperare i post:', error)
+      })
+  }, [])
 
   const handleShowComments = (postId) => {
-    setSelectedPostId(postId);
-    setShowModal(true);
-    dispatch(fetchComments(postId)); // Fetch dei commenti per il post selezionato
-  };
+    setSelectedPostId(postId)
+    setShowModal(true)
+    dispatch(fetchComments(postId)) // Fetch dei commenti per il post selezionato
+  }
 
   const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedPostId(null);
-  };
+    setShowModal(false)
+    setSelectedPostId(null)
+  }
 
   const handleAddComment = () => {
     // Implementa la logica per aggiungere un nuovo commento
     console.log(
       `Aggiungi commento: "${newComment}" per il post ID: ${selectedPostId}`
-    );
-    setNewComment(""); // Reset del campo di input
-    handleCloseModal();
-  };
+    )
+    setNewComment('') // Reset del campo di input
+    handleCloseModal()
+  }
+
+  // Funzione per formattare la data
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+
+    return `${day}/${month}/${year} alle ${hours}:${minutes}`
+  }
 
   return (
     <>
@@ -66,13 +79,15 @@ const PostersHome = () => {
                 src={post.user.image}
                 width="65px"
                 height="65px"
-                style={{ objectFit: "fill" }}
+                style={{ objectFit: 'fill' }}
                 className="rounded-circle me-3"
               />
               <div>
-                <h5 className="mb-0 mt-1">Utente : {post.username}</h5>
+                <h5 className="mb-0 mt-1">
+                  {post.user.name + ' ' + post.user.surname}
+                </h5>
                 <p className="mb-0">
-                  Data : {new Date(post.createdAt).toLocaleDateString()}
+                  Pubblicato il {formatDate(post.createdAt)}
                 </p>
               </div>
             </div>
@@ -159,7 +174,7 @@ const PostersHome = () => {
         </Modal.Footer>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default PostersHome;
+export default PostersHome

@@ -9,7 +9,8 @@ import { useState } from 'react'
 import MyNav from '../components/MyNav'
 
 const Profile = () => {
-  const [isSearchVisible, setIsSearchVisible] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [isSearchVisible, setIsSearchVisible] = useState(false)
 
   return (
     <>
