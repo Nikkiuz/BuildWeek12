@@ -3,13 +3,13 @@ import userReducer from "./reducers/userReducer";
 import searchReducer from "./features/searchSlice";
 import postsReducer from "./reducers/postReducer";
 import experiencesReducer from "./reducers/experiencesReduces";
+import commentsReducer from "./reducers/commentsReducer";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["userReducer", "searchReducer"],
 };
 
 const allReducers = combineReducers({
@@ -17,6 +17,7 @@ const allReducers = combineReducers({
   searchReducer,
   postsReducer,
   experiencesReducer,
+  commentsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, allReducers);

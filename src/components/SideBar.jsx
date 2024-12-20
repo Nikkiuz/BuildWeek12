@@ -25,12 +25,10 @@ const Sidebar = () => {
   let lastActivity = useSelector((state) => state.postsReducer.posts);
   lastActivity = lastActivity[lastActivity.length - 1];
 
-  // Chiamata API al montaggio del componente
   useEffect(() => {
     dispatch(fetchAllProfiles());
   }, [dispatch]);
 
-  // Stato di caricamento
   if (loading) {
     return (
       <div className="text-center mt-5">
@@ -39,7 +37,6 @@ const Sidebar = () => {
     );
   }
 
-  // Stato di errore
   if (error) {
     return (
       <div className="text-center mt-5">
