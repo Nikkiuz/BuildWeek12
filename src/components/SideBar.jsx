@@ -12,6 +12,7 @@ import {
 import { FaPen } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllProfiles } from '../redux/actions/userAction'
+import { AiOutlineEdit } from 'react-icons/ai'
 
 const Sidebar = () => {
   const dispatch = useDispatch()
@@ -61,7 +62,15 @@ const Sidebar = () => {
                   <p className="mb-0">Italiano</p>
                 </div>
                 <a href="#" className="text-decoration-none text-primary">
-                  <FaPen />
+                  <AiOutlineEdit
+                    className="ms-4"
+                    style={{
+                      color: '#181818',
+                      width: '24px',
+                      height: '24px',
+                      cursor: 'pointer',
+                    }}
+                  ></AiOutlineEdit>
                 </a>
               </Card.Body>
             </Card>
@@ -81,7 +90,6 @@ const Sidebar = () => {
                      ${meProfile.email}`}
                   </a>
                 </p>
-                <a href="#" className="text-decoration-none text-primary"></a>
               </Card.Body>
             </Card>
 
